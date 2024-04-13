@@ -136,7 +136,7 @@ class _pricescreenState extends State<pricescreen> {
                     },
                     child: Align(
                       alignment: Alignment.bottomLeft,
-                      child: CustomBTN(selected: true,isNextBtn: false),
+                      child: CustomBTN(selected: _selectedcardindex==-1,isNextBtn: false),
                     ),
                   ),
                   SizedBox(width: 80,),

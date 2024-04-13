@@ -98,7 +98,7 @@ class _ItemscreenState extends State<Itemscreen> {
                     },
                     child: Align(
                       alignment: Alignment.bottomRight,
-                      child: CustomBTN(selected: true,isNextBtn: false),
+                      child: CustomBTN(selected: selectedcardindex==-1,isNextBtn: false),
                     ),
                   ),
                   SizedBox(width: 80,),

@@ -43,6 +43,8 @@ class _Front_State extends State<Front_> with TickerProviderStateMixin {
   }
 
 
+
+
   Future<bool> loadMachineInfo()async{
     status='Connecting';
     btConnected=false;
@@ -53,6 +55,7 @@ class _Front_State extends State<Front_> with TickerProviderStateMixin {
     print('Loading machininfo ${machineinfojson}');
     if(machineinfojson !=null){
       MachineInfo machineInfo = MachineInfo.fromJson(jsonDecode(machineinfojson));
+      print(machineInfo.BTaddress);
       if(machineInfo.BTaddress.isNotEmpty && blueServices.validateID(machineInfo.BTaddress)){
         bool isConnected =await blueServices.triggerPipelineToConnect(machineInfo.BTaddress);
         if(isConnected){
@@ -154,7 +157,7 @@ return true;
                       theheight: 100.0,
                       thewidth: 650.0,
                       theChild: Text(
-                        "Milk Despensory",
+                       "name",
                         style: TextStyle(
                             fontFamily: 'bolt-semibold.ttf',
                             decoration: TextDecoration.none,
