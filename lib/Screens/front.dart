@@ -46,7 +46,9 @@ class _Front_State extends State<Front_> with TickerProviderStateMixin {
 
 
   Future<bool> loadMachineInfo()async{
-    status='Connecting';
+    status=''
+        ''
+        '';
     btConnected=false;
     setState(() {
     });

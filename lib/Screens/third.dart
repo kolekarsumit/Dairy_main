@@ -20,16 +20,46 @@ class payment extends StatefulWidget {
 }
 
 class _paymentState extends State<payment> {
-  bool Paymentmode=true;
+   bool Paymentmode=true;
 
-  void loadMachineInfo()async{
+  void loadMachineInfo() async{
     SharedPreferences preferences=await SharedPreferences.getInstance();
     String? machineinfojson=preferences.getString('machineInfo');
     print('Loading machininfo ${machineinfojson}');
     if(machineinfojson !=null){
       MachineInfo machineInfo = MachineInfo.fromJson(jsonDecode(machineinfojson));
       Paymentmode=machineInfo.isPaymentMode;
-    setState(() {
+      // free mode
+      if(!Paymentmode){
+
+        // print(model.characters);
+
+        String modelstr = model.characters.toString();
+        modelstr = modelstr.replaceAll("[", "{");
+        modelstr = modelstr.replaceAll("]", "}");
+
+        print(modelstr);
+        blueServices.sendDataOverSingleBluetooth(modelstr);
+
+        model.characters = List<String>.generate(model.characters.length, (index) => '0');
+        Future.delayed(Duration(seconds: 10), () {
+          setState(() {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => anim()),
+            );
+          });
+        });
+      }
+
+      else{
+
+        //check payment success
+
+
+      }
+
+      setState(() {
     });
     }
   }
@@ -40,29 +70,10 @@ class _paymentState extends State<payment> {
 
     // Wait for 10 seconds and then navigate to the second screen
     print(model.characters);
-
-    // free mode
-    if(!Paymentmode){
-
-      blueServices.sendDataOverSingleBluetooth(model.characters.toString());
-      Future.delayed(Duration(seconds: 10), () {
-        setState(() {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => anim()),
-          );
-        });
-      });
-    }
-
-    else{
-
-      //check payment success
-
-    }
+    print(Paymentmode);
 
 
-    model.characters = List<String>.generate(model.characters.length, (index) => '0');
+
 
   }
 
