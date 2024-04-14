@@ -8,6 +8,8 @@ import 'package:dairy/theme/background.dart';
 import 'package:dairy/theme/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -108,71 +110,34 @@ return true;
             SizedBox(
               height: 30,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
 
-                Container(
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        onTap: ()async{
-                         await loadMachineInfo();
+            GestureDetector(
+              onTap: (){
+                setState(() {
+                  tapcount++;
+                  print(tapcount);
+                  if(tapcount==5){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> PinCodeWidget()),);
+                    tapcount =0;
+                  }
+                });
+              },
 
-                        },
-                        child:  Container(
-                          child: Icon(
-                            btConnected
-                                ? Icons.bluetooth_connected
-                                : Icons.bluetooth_disabled,
-                            size: 50,
-                            color: btConnected ? AppColor.primarygray : AppColor.primarybordercol,
-                          ),
-                        ),
-                      ),
-
-                      SizedBox(height: 10,),
-                      Text(
-                        status,
-                        style: TextStyle(
-                            fontSize: 10, fontFamily: 'bolt-semibold.ttf',
-                        color: AppColor.primarygray,
-                        decoration: TextDecoration.none),
-                      ),
-                    ],
+              child: frostedglass_(
+                  theheight: 100.0,
+                  thewidth: 650.0,
+                  theChild: Text(
+                   "Farm-Fresh Milk",
+                    style: TextStyle(
+                        fontFamily: 'bolt-semibold.ttf',
+                        decoration: TextDecoration.none,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 55,
+                        color: Colors.white),
                   ),
-                ),
-                GestureDetector(
-                  onTap: (){
-                    setState(() {
-                      tapcount++;
-                      print(tapcount);
-                      if(tapcount==5){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> PinCodeWidget()),);
-                        tapcount =0;
-                      }
-                    });
-                  },
-
-                  child: frostedglass_(
-                      theheight: 100.0,
-                      thewidth: 650.0,
-                      theChild: Text(
-                       "name",
-                        style: TextStyle(
-                            fontFamily: 'bolt-semibold.ttf',
-                            decoration: TextDecoration.none,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 55,
-                            color: Colors.white),
-                      ),
-                      thecolor: Colors.transparent),
-                ),
-                SizedBox(),
-
-              ],
+                  thecolor: Colors.transparent),
             ),
+            SizedBox(),
             SizedBox(
               height: 50,
             ),
@@ -247,6 +212,42 @@ return true;
               },
             ),
 
+            Align(
+
+              alignment: Alignment.bottomLeft,
+
+              child: Container(
+    width: 100,
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: ()async{
+                        await loadMachineInfo();
+
+                      },
+                      child:  Container(
+                        child: Icon(
+                          btConnected
+                              ? Icons.bluetooth_connected
+                              : Icons.bluetooth_disabled,
+                          size: 50,
+                          color: btConnected ? AppColor.primarygray : AppColor.primarybordercol,
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(height: 10,),
+                    Text(
+                      status,
+                      style: TextStyle(
+                          fontSize: 10, fontFamily: 'bolt-semibold.ttf',
+                          color: AppColor.primarygray,
+                          decoration: TextDecoration.none),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             // SizedBox(height: 50,)
           ],
         )

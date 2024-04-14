@@ -15,7 +15,7 @@ class _animState extends State<anim> {
   void initState() {
     super.initState();
     // Wait for 10 seconds and then navigate to the second screen
-    Future.delayed(Duration(seconds: 10), () {
+    Future.delayed(Duration(seconds: 44), () {
       setState(() {
         Navigator.pushReplacement(
           context,

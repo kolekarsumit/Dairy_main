@@ -12,14 +12,15 @@ class topbar extends StatelessWidget {
           child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
-                width: 130,
-                height: 130,
+                width: 350,
+                height: 150,
                 child: Image.asset(
-                  'assets/images/logo.png',
-                  fit: BoxFit.cover,
+
+                  'assets/images/toplogo.png',
+                  fit: BoxFit.fill,
                 )
             ),
-            Container(width: 50,),
+            Container(width: 5,),
             Text(
               "THE FRESH DAIRY PRODUCT",
               style: TextStyle(
@@ -31,7 +32,7 @@ class topbar extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(width: 50,),
+            SizedBox(width: 5,),
             Container(
                 width: 220,
                 height: 150,
