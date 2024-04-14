@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dairy/Screens/Datamodel.dart';
 import 'package:dairy/Screens/thanks.dart';
 import 'package:dairy/Widgets/top_bar.dart';
+import 'package:dairy/cards/price_card.dart';
 import 'package:dairy/theme/background.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,7 +14,8 @@ import '../main.dart';
 import 'animation.dart';
 
 class payment extends StatefulWidget {
-  const payment({super.key});
+  final String price;
+  const payment({super.key, required this.price});
 
   @override
   State<payment> createState() => _paymentState();
@@ -100,7 +102,7 @@ class _paymentState extends State<payment> {
                     fontFamily: 'bolt-regular.ttf'
                   ),),
                   SizedBox(height: 5,),
-                  Text("\$80.0",style: TextStyle(fontSize: 30,
+                  Text("\$${widget.price}",style: TextStyle(fontSize: 30,
                       fontFamily: 'bolt-regular.ttf',
                 ),),
                   SizedBox(height: 5,),

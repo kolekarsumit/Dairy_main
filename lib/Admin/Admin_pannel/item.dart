@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -6,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../Background/image_change.dart';
 import 'ProductForm.dart';
 import 'details_model.dart';
-
 
 class Itemproduct extends StatefulWidget {
   const Itemproduct({Key? key}) : super(key: key);
@@ -17,11 +15,13 @@ class Itemproduct extends StatefulWidget {
 
 class _ItemState extends State<Itemproduct> {
   List<Product> productDetails = [];
- @override
+
+  @override
   void initState() {
     super.initState();
     loadProductList();
   }
+
   void loadProductList() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? productListJson = prefs.getString('productList');
@@ -34,10 +34,17 @@ class _ItemState extends State<Itemproduct> {
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return Container(
+
+      color: Colors.white24,
+
+      width:MediaQuery.of(context).size.width,
+      height:600,
+      // color: Colors.red,
+      child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -54,7 +61,7 @@ class _ItemState extends State<Itemproduct> {
             ),
             SizedBox(height: 20),
             Row(
-              mainAxisAlignment:MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
                   onTap: () {
@@ -65,17 +72,17 @@ class _ItemState extends State<Itemproduct> {
                     child: Column(
                       children: [
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             _showPopup(context);
                           },
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.yellowAccent,
-                                border:
-                                Border.all(color: Colors.black54, width: 1)),
-                            padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                                border: Border.all(
+                                    color: Colors.black54, width: 1)),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 25),
                             child: Text(
                               "Add Product",
                               style: TextStyle(
@@ -98,20 +105,21 @@ class _ItemState extends State<Itemproduct> {
                     child: Column(
                       children: [
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             Navigator.pushReplacement(
                               context,
-                              MaterialPageRoute(builder: (context) => ImageChange()),
+                              MaterialPageRoute(
+                                  builder: (context) => ImageChange()),
                             );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.yellowAccent,
-                                border:
-                                Border.all(color: Colors.black54, width: 1)),
-                            padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                                border: Border.all(
+                                    color: Colors.black54, width: 1)),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 25),
                             child: Text(
                               "Select Theme",
                               style: TextStyle(
@@ -132,14 +140,12 @@ class _ItemState extends State<Itemproduct> {
                 itemCount: productDetails.length,
                 itemBuilder: (context, index) {
                   return ProductForm(index, productDetails,
-                          (List<Product> updatedList){
-                    productDetails=updatedList;
+                      (List<Product> updatedList) {
+                    productDetails = updatedList;
                     String productListJson = jsonEncode(productDetails);
-                     print('updated ${productListJson}');
-                     saveProductList();
-                    setState(() {
-
-                    });
+                    print('updated ${productListJson}');
+                    saveProductList();
+                    setState(() {});
                   });
                 },
               ),
@@ -198,7 +204,7 @@ class _ItemState extends State<Itemproduct> {
                       Expanded(
                         child: TextField(
                           onChanged: (value) {
-                            newPrice1   = value;
+                            newPrice1 = value;
                           },
                           decoration: InputDecoration(labelText: 'Price 1.'),
                         ),
@@ -219,7 +225,7 @@ class _ItemState extends State<Itemproduct> {
                       Expanded(
                         child: TextField(
                           onChanged: (value) {
-                            newPrice2   = value;
+                            newPrice2 = value;
                           },
                           decoration: InputDecoration(labelText: 'Price 2.'),
                         ),
@@ -240,7 +246,7 @@ class _ItemState extends State<Itemproduct> {
                       Expanded(
                         child: TextField(
                           onChanged: (value) {
-                            newPrice3  = value;
+                            newPrice3 = value;
                           },
                           decoration: InputDecoration(labelText: 'Price 3.'),
                         ),
@@ -253,22 +259,21 @@ class _ItemState extends State<Itemproduct> {
           ),
           actions: <Widget>[
             TextButton(
-              onPressed: () async{
+              onPressed: () async {
                 setState(() {
-                  productDetails.add(
-                      Product(
+                  productDetails.add(Product(
                     productId: newProductId,
                     productName: newProductName,
                     price1: newPrice1,
                     quantity1: newQuantity1,
                     price2: newPrice2,
-                    isEnable: true,
                     quantity2: newQuantity2,
                     price3: newPrice3,
+                    isEnable: true,
                     quantity3: newQuantity3,
                   ));
 
-                   saveProductList();
+                  saveProductList();
                 });
                 Navigator.of(context).pop();
               },
@@ -286,5 +291,4 @@ class _ItemState extends State<Itemproduct> {
     print('added list ${productListJson}');
     prefs.setString('productList', productListJson);
   }
-
 }

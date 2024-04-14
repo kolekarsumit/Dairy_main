@@ -20,8 +20,9 @@ class pricescreen extends StatefulWidget {
   int selectedindex;
   String img;
 
+  final List<Product> productDetails;
 
-   pricescreen(this.selectedindex,  this.img);
+   pricescreen(this.selectedindex,  this.img,this.productDetails);
 
   @override
   State<pricescreen> createState() => _pricescreenState();
@@ -30,11 +31,12 @@ class pricescreen extends StatefulWidget {
 
 
 class _pricescreenState extends State<pricescreen> {
+  List<Product> productDetails=[];
   int cardindex = -1;
   int _selectedcardindex=-1;
   String product='';
-  int total=-1;
-  int pp=0;
+String pd='';
+String qd='';
   // int current=0;
 
   @override
@@ -59,12 +61,15 @@ class _pricescreenState extends State<pricescreen> {
     setState(() {
       _selectedcardindex = index;
       if(_selectedcardindex==0){
-        total=pp*1;
+        pd=productDetails[cardindex].price1;
+        qd=productDetails[cardindex].quantity1;
       }else if(_selectedcardindex==1){
-        total=pp*2;
+        pd=productDetails[cardindex].price2;
+        qd=productDetails[cardindex].quantity2;
       }
       else{
-        total=pp*4;
+        pd=productDetails[cardindex].price3;
+        qd=productDetails[cardindex].quantity3;
       }
 
     });
@@ -73,24 +78,13 @@ class _pricescreenState extends State<pricescreen> {
   @override
   void initState() {
     super.initState();
-    loadProductList();
+    // loadProductList();
     cardindex=widget.selectedindex;
-    print("selected index is : ${cardindex}");
+    print("selected index is : ${widget.selectedindex}");
+    productDetails = widget.productDetails;
 
   }
-  List<Product> productDetails = [];
-  void loadProductList() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? productListJson = prefs.getString('productList');
-    print(productListJson);
-    if (productListJson != null) {
-      List<dynamic> jsonList = jsonDecode(productListJson);
-      setState(() {
-        productDetails =
-            jsonList.map((json) => Product.fromJson(json)).toList();
-      });
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -114,13 +108,13 @@ class _pricescreenState extends State<pricescreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(onTap: () => selectedcard(0),
-                      child: price(_img, productDetails[cardindex].quantity1 , _selectedcardindex == 0,pp*1),
+                      child: price(_img, productDetails[cardindex].quantity1 , _selectedcardindex == 0, productDetails[cardindex].price1),
                     ),
                     GestureDetector(onTap: () => selectedcard(1),
-                      child: price(_img,  productDetails[cardindex].quantity2 , _selectedcardindex == 1,pp*2),
+                      child: price(_img,  productDetails[cardindex].quantity2 , _selectedcardindex == 1,productDetails[cardindex].price2),
                     ),
                     GestureDetector(onTap: () => selectedcard(2),
-                      child: price(_img,  productDetails[cardindex].quantity3 , _selectedcardindex == 2,pp*4),
+                      child: price(_img,  productDetails[cardindex].quantity3 , _selectedcardindex == 2,productDetails[cardindex].price3),
                     ),
                   ],
                 ),
@@ -160,7 +154,7 @@ class _pricescreenState extends State<pricescreen> {
                                 SizedBox(width: 90,),
                                 TextButton(onPressed: () {
                                  new model(cardindex, (_selectedcardindex+1).toString());
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => payment()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => payment(price: pd,)));
                                 },
                                   child: Text("Continue",style: TextStyle(
                                     fontSize: 15,
@@ -203,7 +197,7 @@ class _pricescreenState extends State<pricescreen> {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(left: 15.0, top: 5),
-                                            child: Text(productDetails[cardindex].quantity3,
+                                            child: Text(qd,
                                               style: TextStyle(color: Colors.black, fontSize: 14, fontFamily: 'fonts/bolt-semibold.ttf',),
                                             ),
                                           )
@@ -219,7 +213,7 @@ class _pricescreenState extends State<pricescreen> {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(left: 15.0, top: 5),
-                                            child: Text("",
+                                            child: Text(pd,
                                               style: TextStyle(color: Colors.black, fontSize: 14, fontFamily: 'fonts/bolt-semibold.ttf',),
                                             ),
                                           )

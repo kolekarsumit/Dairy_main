@@ -8,7 +8,7 @@ class price extends StatelessWidget {
   String img;
   String quantity;
   bool select=false;
-  int total;
+  String total;
 
 
   price(this.img, this.quantity,this.select,this.total);
@@ -84,7 +84,7 @@ class price extends StatelessWidget {
                       )
                   ),
                   padding:  EdgeInsets.symmetric(vertical: 8,horizontal: 28),
-                  child: Text(total.toString(),
+                  child: Text(total,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,

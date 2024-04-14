@@ -109,7 +109,7 @@ class _ItemscreenState extends State<Itemscreen> {
                         if(selectedcardindex!=-1) {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => pricescreen(selectedcardindex,img[selectedcardindex%3]),
+                            MaterialPageRoute(builder: (context) => pricescreen(selectedcardindex,img[selectedcardindex%3],productDetails),
                           ),
                           );
                         }

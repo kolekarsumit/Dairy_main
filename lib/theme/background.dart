@@ -1,9 +1,11 @@
+import 'package:dairy/Screens/thanks.dart';
 import 'package:dairy/theme/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class backscreen extends StatelessWidget {
-  const backscreen({super.key});
+  final String? str;
+  const backscreen({super.key,this.str});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class backscreen extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Image.asset(
-          'assets/images/background2.png',
+          str!.isEmpty?"assets/images/background2.png":str!,
           fit: BoxFit.cover,
         )
     );

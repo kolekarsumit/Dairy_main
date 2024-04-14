@@ -3,6 +3,8 @@ import 'package:dairy/Screens/front.dart';
 import 'package:flutter/material.dart';
 
 import 'Admin/Admin_pannel/Admin_View.dart';
+import 'Admin/Background/BackgroundScreen.dart';
+import 'Admin/Background/image_change.dart';
 import 'Screens/Demo.dart';
 import 'Screens/animation.dart';
 import 'Screens/thanks.dart';
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Front_(),
+      home: AdminView(),
     );
   }
 }
