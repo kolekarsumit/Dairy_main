@@ -1,3 +1,5 @@
+
+import 'package:shared_preferences/shared_preferences.dart';
 class MachineInfo{
   bool isPaymentMode;
    String name;
@@ -49,4 +51,28 @@ class MachineInfo{
         merchantId: json['merchantId'],
     );
   }
+
+  static Future<void> saveSelectedBackground(String imagePath) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedBackground', imagePath);
+  }
+
+  // Function to retrieve the selected background image path from shared preferences
+  static Future<String> getSelectedBackground() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('selectedBackground') ?? "";
+  }
+  static Future<void> saveSelectedLogo(String imagePath) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLogo', imagePath);
+  }
+
+  // Method to retrieve the selected logo image path from shared preferences
+  static Future<String> getSelectedLogo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('selectedLogo') ?? "";
+  }
+
+
+
 }

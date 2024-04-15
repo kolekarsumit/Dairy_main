@@ -1,5 +1,9 @@
 
 import 'dart:convert';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:dairy/Admin/Admin_pannel/navbar.dart';
 import 'package:dairy/Admin/Background/BackgroundScreen.dart';
@@ -112,6 +116,24 @@ class _AdminViewState extends State<AdminView> {
 
   }
 
+  File? _image1;
+  File? _image2;
+
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> _getImage(ImageSource source, int buttonIndex) async {
+    final pickedFile = await _picker.pickImage(source: source);
+    if (pickedFile != null) {
+      setState(() {
+        if (buttonIndex == 1) {
+          _image1 = File(pickedFile.path);
+          MachineInfo.saveSelectedLogo(pickedFile.path); // Save selected logo path
+        } else {
+          _image2 = File(pickedFile.path);
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -220,6 +242,70 @@ class _AdminViewState extends State<AdminView> {
               back(),
 
 
+              SizedBox(height: 100,),
+              ElevatedButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: Container(
+                          width: 200.0,
+                          height: 200.0,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Popup Content'),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      _getImage(ImageSource.gallery, 1);
+                                    },
+                                    child: _image1 != null
+                                        ? CircleAvatar(
+                                      radius: 30.0,
+                                      backgroundImage: FileImage(_image1!),
+                                    )
+                                        : ElevatedButton(
+                                      onPressed: () {
+                                        _getImage(ImageSource.gallery, 1);
+                                      },
+                                      child: Text('Button 1'),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      _getImage(ImageSource.gallery, 2);
+                                    },
+                                    child: _image2 != null
+                                        ? CircleAvatar(
+                                      radius: 30.0,
+                                      backgroundImage: FileImage(_image2!),
+                                    )
+                                        : ElevatedButton(
+                                      onPressed: () {
+                                        _getImage(ImageSource.gallery, 2);
+                                      },
+                                      child: Text('Button 2'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: Text('Open Popup'),
+              ),
+
+
+
             ],
           ),
         ),
@@ -268,3 +354,4 @@ class _AdminViewState extends State<AdminView> {
     merchandIdController.text=machineInfo.merchantId;
   }
 }
+
