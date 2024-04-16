@@ -1,3 +1,4 @@
+import 'dart:io'; // Import 'dart:io' for File
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,18 +10,31 @@ class backscreen extends StatelessWidget {
     return StreamBuilder<String>(
       stream: getSelectedBackgroundStream(),
       builder: (context, snapshot) {
-        String selectedImagePath = snapshot.data ?? "assets/images/background1.png";
-        return Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(selectedImagePath),
-              fit: BoxFit.cover,
-            ),
-          ),
-        );
+        String selectedImagePath = snapshot.data ?? "";
+        if (selectedImagePath.isNotEmpty) {
+          return _buildImage(selectedImagePath);
+        } else {
+          return Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            color: Colors.white, // Default background color if no image is selected
+          );
+        }
       },
+    );
+  }
+
+  // Function to build a container with FileImage
+  Widget _buildImage(String imagePath) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: FileImage(File(imagePath)),
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 

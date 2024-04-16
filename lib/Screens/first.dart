@@ -11,7 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../Admin/Admin_pannel/details_model.dart';
-import 'Datamodel.dart';
+import '../models/Datamodel.dart';
 class Itemscreen extends StatefulWidget {
   const Itemscreen({Key? key}) : super(key: key);
 

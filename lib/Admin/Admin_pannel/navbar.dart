@@ -1,8 +1,6 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:dairy/Admin/Admin_pannel/machine_model.dart';
-
 import 'Payment.dart';
 
 class nav_ extends StatelessWidget {
@@ -11,7 +9,7 @@ class nav_ extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<String>(
-      future: MachineInfo.getSelectedLogo(), // Retrieve selected logo path
+      future: MachineInfo.getSelectedLogo('Logo1'), // Retrieve selected logo path
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return CircularProgressIndicator(); // Show loading indicator while fetching logo

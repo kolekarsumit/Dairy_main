@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:dairy/Screens/Datamodel.dart';
+import 'package:dairy/models/Datamodel.dart';
 import 'package:dairy/Screens/thanks.dart';
 import 'package:dairy/Widgets/top_bar.dart';
 import 'package:dairy/cards/price_card.dart';
@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../Admin/Admin_pannel/machine_model.dart';
 import '../bluetooth_service/services/blue_services.dart';
 import '../main.dart';
-import 'animation.dart';
+import 'fourth.dart';
 
 class payment extends StatefulWidget {
   final String price;
@@ -48,7 +48,7 @@ class _paymentState extends State<payment> {
           setState(() {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => anim()),
+              MaterialPageRoute(builder: (context) => fourth_()),
             );
           });
         });

@@ -3,14 +3,14 @@ import 'package:dairy/Screens/thanks.dart';
 import 'package:dairy/theme/background.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-class anim extends StatefulWidget {
-  const anim({super.key});
+class fourth_ extends StatefulWidget {
+  const fourth_({super.key});
 
   @override
-  State<anim> createState() => _animState();
+  State<fourth_> createState() => _fourthState();
 }
 
-class _animState extends State<anim> {
+class _fourthState extends State<fourth_> {
 
   void initState() {
     super.initState();

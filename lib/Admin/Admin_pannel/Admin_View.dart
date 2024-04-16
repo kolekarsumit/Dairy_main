@@ -11,6 +11,7 @@ import 'package:dairy/main.dart';
 import 'package:dairy/theme/background.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../Screens/logoscreen.dart';
 import '../../bluetooth_service/utils/toast_msg.dart';
 import 'Payment.dart';
 import 'item.dart';
@@ -93,10 +94,15 @@ class _AdminViewState extends State<AdminView> {
   TextEditingController          BTaddressController=TextEditingController();
   TextEditingController          merchandIdController=TextEditingController();
 
+
+  File? _logo1;
+  File? _logo2;
   @override
   void initState(){
     super.initState();
     loadMachineInfo();
+    print(_logo1);
+    print(_logo2);
 
   }
   void loadMachineInfo()async{
@@ -116,24 +122,9 @@ class _AdminViewState extends State<AdminView> {
 
   }
 
-  File? _image1;
-  File? _image2;
 
-  final ImagePicker _picker = ImagePicker();
 
-  Future<void> _getImage(ImageSource source, int buttonIndex) async {
-    final pickedFile = await _picker.pickImage(source: source);
-    if (pickedFile != null) {
-      setState(() {
-        if (buttonIndex == 1) {
-          _image1 = File(pickedFile.path);
-          MachineInfo.saveSelectedLogo(pickedFile.path); // Save selected logo path
-        } else {
-          _image2 = File(pickedFile.path);
-        }
-      });
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -243,67 +234,12 @@ class _AdminViewState extends State<AdminView> {
 
 
               SizedBox(height: 100,),
-              ElevatedButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        content: Container(
-                          width: 200.0,
-                          height: 200.0,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('Popup Content'),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      _getImage(ImageSource.gallery, 1);
-                                    },
-                                    child: _image1 != null
-                                        ? CircleAvatar(
-                                      radius: 30.0,
-                                      backgroundImage: FileImage(_image1!),
-                                    )
-                                        : ElevatedButton(
-                                      onPressed: () {
-                                        _getImage(ImageSource.gallery, 1);
-                                      },
-                                      child: Text('Button 1'),
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      _getImage(ImageSource.gallery, 2);
-                                    },
-                                    child: _image2 != null
-                                        ? CircleAvatar(
-                                      radius: 30.0,
-                                      backgroundImage: FileImage(_image2!),
-                                    )
-                                        : ElevatedButton(
-                                      onPressed: () {
-                                        _getImage(ImageSource.gallery, 2);
-                                      },
-                                      child: Text('Button 2'),
-                                    ),
-                                  ),
-                                ],
-                              ),
 
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-                child: Text('Open Popup'),
+              LogoSelector(
+                initialLogo1: _logo1,
+                initialLogo2: _logo2,
+                onLogoSelection: _handleLogoSelection,
               ),
-
 
 
             ],
@@ -313,6 +249,13 @@ class _AdminViewState extends State<AdminView> {
       ),
     );
   }
+  void _handleLogoSelection(File? logo1, File? logo2) {
+    setState(() {
+      _logo1 = logo1;
+      _logo2 = logo2;
+    });
+  }
+
   MachineInfo getMachineInfo(){
        String nameStr=  nameController.text.toString();
        String  mobileStr=mobileNoController.text.toString();

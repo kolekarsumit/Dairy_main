@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dairy/Admin/Admin_pannel/details_model.dart';
-import 'package:dairy/Screens/Datamodel.dart';
+import 'package:dairy/models/Datamodel.dart';
 import 'package:dairy/Screens/thanks.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
