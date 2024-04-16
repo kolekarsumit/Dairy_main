@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:io';
 
@@ -14,7 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Screens/logoscreen.dart';
 import '../../bluetooth_service/utils/toast_msg.dart';
 import 'Payment.dart';
-import 'item.dart';
+import 'ShowProduct.dart';
 import 'machine_model.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -111,7 +110,7 @@ class _AdminViewState extends State<AdminView> {
     print('Loading machininfo ${machineinfojson}');
     if(machineinfojson !=null){
       MachineInfo machineInfo = MachineInfo.fromJson(jsonDecode(machineinfojson));
-       setDefaultDataToController(machineInfo);
+      setDefaultDataToController(machineInfo);
     }
   }
 
@@ -132,120 +131,120 @@ class _AdminViewState extends State<AdminView> {
       body: Stack(
         children: [
           backscreen(),
-        SingleChildScrollView(
-          child: Column(
-            children: [
-              nav_(),
-              SizedBox(height: 30),
-              CustomTextField(
-                label: "Name",
-                hintText: "Enter Name",
-                keyboardType: TextInputType.text,
-                width: 170.0,
-                controller: nameController,
-              ),
-              SizedBox(height: 20),
-              CustomTextField(
-                label: "Mobile Number",
-                hintText: "Enter Mobile number",
-                keyboardType: TextInputType.phone,
-                width: 60.0,
-                controller: mobileNoController,
-              ),
-              SizedBox(height: 20),
-              CustomTextField(
-                label: "City",
-                hintText: "Enter City",
-                keyboardType: TextInputType.text,
-                width: 190.0,
-                controller: cityController,
-              ),
-              SizedBox(height: 20),
-              CustomTextField(
-                label: "BT Name",
-                hintText: "Enter BT Name",
-                keyboardType: TextInputType.text,
-                width: 130.0,
-                controller: BTnameController,
-              ),
-              SizedBox(height: 20),
-              CustomTextField(
-                label: "BT Address",
-                hintText: "Enter BT Address",
-                keyboardType: TextInputType.text,
-                width: 100.0,
-                controller: BTaddressController,
-              ),
-              SizedBox(height: 20),
-              CustomTextField(
-                label: "Merchant ID",
-                hintText: "Enter Merchant ID",
-                keyboardType: TextInputType.text,
-                width: 90.0,
-                controller: merchandIdController,
-              ),
-              SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // widget.callback(widget.machine);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                      backgroundColor: Colors.blue[300], // Background color
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: GestureDetector(
-                      onTap: (){
-                      saveMachineInfo();
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                nav_(),
+                SizedBox(height: 30),
+                CustomTextField(
+                  label: "Name",
+                  hintText: "Enter Name",
+                  keyboardType: TextInputType.text,
+                  width: 170.0,
+                  controller: nameController,
+                ),
+                SizedBox(height: 20),
+                CustomTextField(
+                  label: "Mobile Number",
+                  hintText: "Enter Mobile number",
+                  keyboardType: TextInputType.phone,
+                  width: 60.0,
+                  controller: mobileNoController,
+                ),
+                SizedBox(height: 20),
+                CustomTextField(
+                  label: "City",
+                  hintText: "Enter City",
+                  keyboardType: TextInputType.text,
+                  width: 190.0,
+                  controller: cityController,
+                ),
+                SizedBox(height: 20),
+                CustomTextField(
+                  label: "BT Name",
+                  hintText: "Enter BT Name",
+                  keyboardType: TextInputType.text,
+                  width: 130.0,
+                  controller: BTnameController,
+                ),
+                SizedBox(height: 20),
+                CustomTextField(
+                  label: "BT Address",
+                  hintText: "Enter BT Address",
+                  keyboardType: TextInputType.text,
+                  width: 100.0,
+                  controller: BTaddressController,
+                ),
+                SizedBox(height: 20),
+                CustomTextField(
+                  label: "Merchant ID",
+                  hintText: "Enter Merchant ID",
+                  keyboardType: TextInputType.text,
+                  width: 90.0,
+                  controller: merchandIdController,
+                ),
+                SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // widget.callback(widget.machine);
                       },
-                      child: Text(
-                        "Save",
-                        style: TextStyle(
-                            fontSize: 25,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                        backgroundColor: Colors.blue[300], // Background color
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: GestureDetector(
+                        onTap: (){
+                          saveMachineInfo();
+                        },
+                        child: Text(
+                          "Save",
+                          style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  // MachineInformation(),
-                ],
-              ),
-              // ElevatedButton(
-              //   onPressed: _printInput,
-              //   child: Text("Print Input"),
-              // ),
+                    // MachineInformation(),
+                  ],
+                ),
+                // ElevatedButton(
+                //   onPressed: _printInput,
+                //   child: Text("Print Input"),
+                // ),
 
-              SizedBox(height: 100,),
-              Itemproduct(),
+                SizedBox(height: 100,),
+                Itemproduct(),
 
-              SizedBox(height: 100),
+                SizedBox(height: 100),
 
-              Text("Change Background",style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              ),),
-              back(),
-
-
-              SizedBox(height: 100,),
-
-              LogoSelector(
-                initialLogo1: _logo1,
-                initialLogo2: _logo2,
-                onLogoSelection: _handleLogoSelection,
-              ),
+                Text("Change Background",style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold
+                ),),
+                back(),
 
 
-            ],
+                SizedBox(height: 100,),
+
+                LogoSelector(
+                  initialLogo1: _logo1,
+                  initialLogo2: _logo2,
+                  onLogoSelection: _handleLogoSelection,
+                ),
+
+
+              ],
+            ),
           ),
-        ),
-    ],
+        ],
       ),
     );
   }
@@ -257,21 +256,21 @@ class _AdminViewState extends State<AdminView> {
   }
 
   MachineInfo getMachineInfo(){
-       String nameStr=  nameController.text.toString();
-       String  mobileStr=mobileNoController.text.toString();
-       String  cityStr=  cityController.text.toString();
-       String  BTnameStr= BTnameController.text.toString();
-       String  BTaddressStr=BTaddressController.text.toString();
-       String  merchandIdStr=merchandIdController.text.toString();
-       MachineInfo machineInfo=MachineInfo(
-           isPaymentMode: true,
-           name: nameStr,
-           mobileNo: mobileStr,
-           city: cityStr,
-           BTname: BTnameStr,
-           BTaddress: BTaddressStr,
-           merchantId: merchandIdStr);
-       return machineInfo;
+    String nameStr=  nameController.text.toString();
+    String  mobileStr=mobileNoController.text.toString();
+    String  cityStr=  cityController.text.toString();
+    String  BTnameStr= BTnameController.text.toString();
+    String  BTaddressStr=BTaddressController.text.toString();
+    String  merchandIdStr=merchandIdController.text.toString();
+    MachineInfo machineInfo=MachineInfo(
+        isPaymentMode: true,
+        name: nameStr,
+        mobileNo: mobileStr,
+        city: cityStr,
+        BTname: BTnameStr,
+        BTaddress: BTaddressStr,
+        merchantId: merchandIdStr);
+    return machineInfo;
   }
 
   void saveMachineInfo()async {
@@ -297,4 +296,3 @@ class _AdminViewState extends State<AdminView> {
     merchandIdController.text=machineInfo.merchantId;
   }
 }
-

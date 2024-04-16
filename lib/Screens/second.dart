@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dairy/Admin/Admin_pannel/details_model.dart';
-import 'package:dairy/models/Datamodel.dart';
 import 'package:dairy/Screens/thanks.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +13,8 @@ import 'package:dairy/theme/background.dart';
 import 'package:dairy/theme/colors.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../models/Datamodel.dart';
 
 class pricescreen extends StatefulWidget {
 

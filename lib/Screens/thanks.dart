@@ -7,7 +7,6 @@ import 'package:lottie/lottie.dart';
 
 class thanks_ extends StatefulWidget {
   const thanks_({super.key});
-
   @override
   State<thanks_> createState() => _thanks_State();
 }
@@ -58,7 +57,6 @@ class _thanks_State extends State<thanks_> {
               ),
               Text(" Cheers to your milk satisfaction!",style: TextStyle(
                   fontSize: 25,
-
                   fontFamily: 'bolt-semibold.ttf',
                   fontWeight: FontWeight.bold,
               ),),

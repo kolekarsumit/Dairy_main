@@ -44,27 +44,16 @@ class _PinCodeWidgetState extends State<PinCodeWidget> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => AdminView(
-          // machine: Machine(
-          //   name: 'defaultName',
-          //   mobileNo: 'defaultMobileNo',
-          //   city: 'defaultCity',
-          //   BTname: 'defaultBTName',
-          //   BTaddress: 'defaultBTAddress',
-          //   merchantId: 'defaultMerchantId',
-          // ),
-          // callback: callback,
         )),
       );
     } else {
       // Password is incorrect, show error message
       ScaffoldMessenger.of(context).showSnackBar(
-        // SnackBar(
-        //   content: Text('Incorrect password. Please try again.'),
-        // ),
           SnackBar(
             content: Text(
               'Incorrect password. Please try again.',
               style: TextStyle(
+                fontFamily: 'bolt-regular.ttf',
                 color: Colors.white,
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
@@ -95,6 +84,7 @@ class _PinCodeWidgetState extends State<PinCodeWidget> {
               child: Text(
                 'Enter Your Password',
                 style: TextStyle(
+                  fontFamily: 'bolt-regular.ttf',
                   fontSize: 32,
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
@@ -242,19 +232,3 @@ class _PinCodeWidgetState extends State<PinCodeWidget> {
   }
 }
 
-// class NextScreen extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Next Screen'),
-//       ),
-//       body: Center(
-//         child: Text(
-//           'Welcome to the next screen!',
-//           style: TextStyle(fontSize: 24),
-//         ),
-//       ),
-//     );
-//   }
-// }

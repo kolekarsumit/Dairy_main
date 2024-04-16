@@ -10,14 +10,12 @@ class price extends StatelessWidget {
   bool select=false;
   String total;
 
-
   price(this.img, this.quantity,this.select,this.total);
 
   @override
   Widget build(BuildContext context) {
     double screenheight=MediaQuery.of(context).size.height;
     double screenwidth=MediaQuery.of(context).size.width;
-
 
     return Container(
 
@@ -57,13 +55,7 @@ class price extends StatelessWidget {
                   fontSize: 30,
                 fontFamily: 'bolt-semibold.ttf',
                 ),),
-
-
-
               SizedBox(),
-
-
-
              Container(
                   width: 200,
                   height: 200,
@@ -72,8 +64,6 @@ class price extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-
-
              Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -91,23 +81,9 @@ class price extends StatelessWidget {
                       fontFamily: 'bolt-regular.ttf',
                     ),),
                 ),
-
-
               SizedBox()
             ],
           ),
-
-
-
-
-
-
-
-
-
-
-
-
     );
   }
 }

@@ -53,6 +53,7 @@ class _ItemState extends State<Itemproduct> {
               child: Text(
                 "SET PRODUCT DETAILS",
                 style: TextStyle(
+                  fontFamily: 'bolt-regular.ttf',
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
@@ -86,43 +87,7 @@ class _ItemState extends State<Itemproduct> {
                             child: Text(
                               "Add Product",
                               style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    _showPopup(context);
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 20, left: 25, bottom: 20),
-                    child: Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ImageChange()),
-                            );
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.yellowAccent,
-                                border: Border.all(
-                                    color: Colors.black54, width: 1)),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 25),
-                            child: Text(
-                              "Select Theme",
-                              style: TextStyle(
+                                  fontFamily: 'bolt-regular.ttf',
                                   color: Colors.black,
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold),
@@ -170,11 +135,13 @@ class _ItemState extends State<Itemproduct> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Enter Details'),
+          title: Text('Enter Details',style: TextStyle(
+            fontFamily: 'bolt-regular.ttf',
+          ),),
           content: SingleChildScrollView(
             child: Container(
-              // width: MediaQuery.of(context).size.width * 0.8,
-              // height: MediaQuery.of(context).size.height * 0.5,
+              width: MediaQuery.of(context).size.width * 0.6,
+              height: MediaQuery.of(context).size.height * 0.5,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -182,12 +149,18 @@ class _ItemState extends State<Itemproduct> {
                     onChanged: (value) {
                       newProductId = value;
                     },
+                    style: TextStyle(
+                      fontFamily: 'bolt-regular.ttf',
+                    ),
                     decoration: InputDecoration(labelText: 'Product ID'),
                   ),
                   TextField(
                     onChanged: (value) {
                       newProductName = value;
                     },
+                    style: TextStyle(
+                    fontFamily: 'bolt-regular.ttf',
+                  ),
                     decoration: InputDecoration(labelText: 'Product Name'),
                   ),
                   Row(
@@ -197,6 +170,9 @@ class _ItemState extends State<Itemproduct> {
                           onChanged: (value) {
                             newQuantity1 = value;
                           },
+                          style: TextStyle(
+                            fontFamily: 'bolt-regular.ttf',
+                          ),
                           decoration: InputDecoration(labelText: 'Quantity 1.'),
                         ),
                       ),
@@ -206,6 +182,9 @@ class _ItemState extends State<Itemproduct> {
                           onChanged: (value) {
                             newPrice1 = value;
                           },
+                          style: TextStyle(
+                            fontFamily: 'bolt-regular.ttf',
+                          ),
                           decoration: InputDecoration(labelText: 'Price 1.'),
                         ),
                       ),
@@ -218,6 +197,9 @@ class _ItemState extends State<Itemproduct> {
                           onChanged: (value) {
                             newQuantity2 = value;
                           },
+                          style: TextStyle(
+                            fontFamily: 'bolt-regular.ttf',
+                          ),
                           decoration: InputDecoration(labelText: 'Quantity 2.'),
                         ),
                       ),
@@ -227,6 +209,9 @@ class _ItemState extends State<Itemproduct> {
                           onChanged: (value) {
                             newPrice2 = value;
                           },
+                          style: TextStyle(
+                            fontFamily: 'bolt-regular.ttf',
+                          ),
                           decoration: InputDecoration(labelText: 'Price 2.'),
                         ),
                       ),
@@ -239,6 +224,9 @@ class _ItemState extends State<Itemproduct> {
                           onChanged: (value) {
                             newQuantity3 = value;
                           },
+                          style: TextStyle(
+                            fontFamily: 'bolt-regular.ttf',
+                          ),
                           decoration: InputDecoration(labelText: 'Quantity 3.'),
                         ),
                       ),
@@ -248,6 +236,9 @@ class _ItemState extends State<Itemproduct> {
                           onChanged: (value) {
                             newPrice3 = value;
                           },
+                          style: TextStyle(
+                            fontFamily: 'bolt-regular.ttf',
+                          ),
                           decoration: InputDecoration(labelText: 'Price 3.'),
                         ),
                       ),

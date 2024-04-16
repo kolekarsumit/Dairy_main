@@ -63,28 +63,44 @@ class _DetailsPopupState extends State<DetailsPopup> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Details"),
+      title: Text("Details", style: TextStyle(
+          fontFamily: 'fonts/bolt-semibold.ttf'
+      ),),
       content: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             TextField(
               controller: fatController,
-              decoration: InputDecoration(labelText: 'Fat'),
+              style: TextStyle(
+                  fontFamily: 'fonts/bolt-semibold.ttf'
+              ),
+              decoration: InputDecoration(labelText: 'Fat',
+              ),
             ),
             SizedBox(height: 10,),
             TextField(
               controller: proteinController,
-              decoration: InputDecoration(labelText: 'Protein'),
+              style: TextStyle(
+                  fontFamily: 'fonts/bolt-semibold.ttf'
+              ),
+              decoration: InputDecoration(labelText: 'Protein',
+              ),
             ),
             SizedBox(height: 10,),
             TextField(
               controller: caloriesController,
+              style: TextStyle(
+                  fontFamily: 'fonts/bolt-semibold.ttf'
+              ),
               decoration: InputDecoration(labelText: 'Calories'),
             ),
             SizedBox(height: 10,),
             TextField(
               controller: stock,
+              style: TextStyle(
+                  fontFamily: 'fonts/bolt-semibold.ttf'
+              ),
               decoration: InputDecoration(labelText: 'Stocks'),
             ),
             Row(
@@ -93,7 +109,10 @@ class _DetailsPopupState extends State<DetailsPopup> {
                   onPressed: () {
                     _selectDate(context);
                   },
-                  child: Text('Inserted Date'),
+                  child: Text('Inserted Date',
+                    style: TextStyle(
+                        fontFamily: 'fonts/bolt-semibold.ttf'
+                    ),),
                 ),
                 SizedBox(width: 10),
                 Text('${insertingDate != null ? DateFormat('yyyy-MM-dd').format(insertingDate!) : '${widget.product.insertionDate}'}'),
@@ -105,7 +124,10 @@ class _DetailsPopupState extends State<DetailsPopup> {
                   onPressed: () {
                     _selectExpiryDate(context);
                   },
-                  child: Text('Expiry Date    '),
+                  child: Text('Expiry Date    ',
+                    style: TextStyle(
+                        fontFamily: 'fonts/bolt-semibold.ttf'
+                    ),),
                 ),
                 SizedBox(width: 10),
                 Text('${expiryDate != null ? DateFormat('yyyy-MM-dd').format(expiryDate!) : '${widget.product.expiryDate}'}'),

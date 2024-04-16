@@ -22,7 +22,7 @@ class payment extends StatefulWidget {
 }
 
 class _paymentState extends State<payment> {
-   bool Paymentmode=true;
+  bool Paymentmode=true;
 
   void loadMachineInfo() async{
     SharedPreferences preferences=await SharedPreferences.getInstance();
@@ -62,7 +62,7 @@ class _paymentState extends State<payment> {
       }
 
       setState(() {
-    });
+      });
     }
   }
   // BlueServices blueServices=BlueServices();
@@ -81,7 +81,7 @@ class _paymentState extends State<payment> {
 
   @override
   Widget build(BuildContext context) {
-  int time =12;
+    int time =12;
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -98,16 +98,16 @@ class _paymentState extends State<payment> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Milk Despensor LTD",style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'bolt-regular.ttf'
+                      fontSize: 20,
+                      fontFamily: 'bolt-regular.ttf'
                   ),),
                   SizedBox(height: 5,),
                   Text("\$${widget.price}",style: TextStyle(fontSize: 30,
-                      fontFamily: 'bolt-regular.ttf',
-                ),),
+                    fontFamily: 'bolt-regular.ttf',
+                  ),),
                   SizedBox(height: 5,),
                   Text("Payment Referance",style: TextStyle(
-                    fontSize: 15, fontFamily: 'bolt-regular.ttf'
+                      fontSize: 15, fontFamily: 'bolt-regular.ttf'
                   ),),
                   SizedBox(height: 35,),
 
@@ -118,11 +118,11 @@ class _paymentState extends State<payment> {
                   ),
                   SizedBox(height: 20,),
                   Text("Remaing Time : ${time}",style: TextStyle(
-                    fontSize: 15, fontFamily: 'bolt-regular.ttf'
+                      fontSize: 15, fontFamily: 'bolt-regular.ttf'
                   ),),
                   SizedBox(height: 10,),
                   Text("Status : Waiting",style: TextStyle(
-                    fontSize: 15,
+                      fontSize: 15,
                       fontFamily: 'bolt-regular.ttf'
                   ),)
                 ],
@@ -135,5 +135,3 @@ class _paymentState extends State<payment> {
     );
   }
 }
-
-

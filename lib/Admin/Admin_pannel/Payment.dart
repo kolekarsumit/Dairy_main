@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:dairy/bluetooth_service/utils/toast_msg.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'machine_model.dart';
 
 class PaymentContainer extends StatefulWidget {

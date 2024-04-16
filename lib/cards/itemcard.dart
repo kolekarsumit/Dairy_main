@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../Admin/Admin_pannel/details_model.dart';
 import '../theme/Animation.dart';
 import '../theme/colors.dart';
 
+
 class item_card extends StatefulWidget {
  Product product;
-String img;
-bool select;
+ String img;
+ bool select;
   item_card(this.product,this.img, this.select);
 
   @override

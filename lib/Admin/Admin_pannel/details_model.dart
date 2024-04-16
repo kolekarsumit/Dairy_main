@@ -1,5 +1,5 @@
 class Product {
-  final String productId;
+  late final String productId;
   final String productName;
   final String price1;
   final String quantity1;
