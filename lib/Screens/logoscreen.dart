@@ -48,51 +48,60 @@ class _LogoSelectorState extends State<LogoSelector> {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+    return  Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ElevatedButton(
-              onPressed: () => _getImage(1),
-              child: Text('Select Logo 1'),
+            Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () => _getImage(1),
+                  child: Text('Select Logo 1'),
+                ),
+                SizedBox(height: 50,),
+                FutureBuilder<String>(
+                  future: MachineInfo.getSelectedLogo('Logo1'),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    } else {
+                      final logoPath = snapshot.data;
+                      return logoPath != null
+                          ? CircleAvatar(
+                        radius: 50.0,
+                        backgroundImage: FileImage(File(logoPath)),
+                      )
+                          : SizedBox(); // Placeholder or default logo widget
+                    }
+                  },
+                ),
+              ],
             ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => _getImage(2),
-              child: Text('Select Logo 2'),
-            ),
-            SizedBox(height: 20),
-            FutureBuilder<String>(
-              future: MachineInfo.getSelectedLogo('Logo1'),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                } else {
-                  final logoPath = snapshot.data;
-                  return logoPath != null
-                      ? CircleAvatar(
-                    radius: 50.0,
-                    backgroundImage: FileImage(File(logoPath)),
-                  )
-                      : SizedBox(); // Placeholder or default logo widget
-                }
-              },
-            ),
-            SizedBox(height: 20),
-            FutureBuilder<String>(
-              future: MachineInfo.getSelectedLogo('Logo2'),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                } else {
-                  final logoPath = snapshot.data;
-                  return logoPath != null
-                      ? CircleAvatar(
-                    radius: 50.0,
-                    backgroundImage: FileImage(File(logoPath)),
-                  )
-                      : SizedBox(); // Placeholder or default logo widget
-                }
-              },
+
+            Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () => _getImage(2),
+                  child: Text('Select Logo 2'),
+                ),
+
+                SizedBox(height: 50,),
+                FutureBuilder<String>(
+                  future: MachineInfo.getSelectedLogo('Logo2'),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    } else {
+                      final logoPath = snapshot.data;
+                      return logoPath != null
+                          ? CircleAvatar(
+                        radius: 50.0,
+                        backgroundImage: FileImage(File(logoPath)),
+                      )
+                          : SizedBox(); // Placeholder or default logo widget
+                    }
+                  },
+                ),
+              ],
             ),
           ],
         );

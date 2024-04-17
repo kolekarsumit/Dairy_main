@@ -14,6 +14,8 @@ import '../../Screens/logoscreen.dart';
 import '../../bluetooth_service/utils/toast_msg.dart';
 import 'Payment.dart';
 import 'ShowProduct.dart';
+import 'demo.dart';
+import 'details_model.dart';
 import 'machine_model.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -239,6 +241,19 @@ class _AdminViewState extends State<AdminView> {
                   initialLogo2: _logo2,
                   onLogoSelection: _handleLogoSelection,
                 ),
+
+
+                ElevatedButton(
+                  onPressed: () async {
+                    List<Product> productList = await ProductManager.getProductList();
+                     int indexToEdit = 0;
+                    String newName = 'New Product Name';
+                    await ProductManager.editProductName(indexToEdit, newName);
+                    setState(() {
+                     });
+                  },
+                  child: Text('Edit Product Name'),
+                )
 
 
               ],

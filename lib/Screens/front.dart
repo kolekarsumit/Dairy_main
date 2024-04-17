@@ -23,25 +23,28 @@ class Front_ extends StatefulWidget {
   const Front_({super.key});
 
   @override
-  State<Front_> createState() => _Front_State();
+  State<Front_> createState() => Front_State();
 }
 
-class _Front_State extends State<Front_> with TickerProviderStateMixin {
+class Front_State extends State<Front_> with TickerProviderStateMixin {
 
   late AnimationController _controller;
   String status = "Connecting";
   bool btConnected = false;
+  late MachineInfo machineInfo;
 
 
   @override
   void initState() {
     super.initState();
     loadMachineInfo();
+    machineInfo= MachineInfo(isPaymentMode: false, name: '', mobileNo: '', city: '', BTname: '', BTaddress: '', merchantId: '');
     _controller = AnimationController(
       duration: Duration(milliseconds: 500),
       vsync: this,
     );
-      _controller.repeat(reverse: true);
+    _controller.repeat(reverse: true);
+    print("name is ${machineInfo.name}");
   }
 
 
@@ -75,18 +78,18 @@ class _Front_State extends State<Front_> with TickerProviderStateMixin {
 
       }
 
-    setState(() {
+      setState(() {
 
-    });
+      });
 
     }
-return true;
+    return true;
   }
 
   @override
   void didUpdateWidget(covariant Front_ oldWidget) {
     super.didUpdateWidget(oldWidget);
-      _controller.repeat(reverse: true);
+    _controller.repeat(reverse: true);
   }
 
   @override
@@ -127,7 +130,7 @@ return true;
                   theheight: 100.0,
                   thewidth: 650.0,
                   theChild: Text(
-                   "Farm-Fresh Milk",
+                    "Farm-Fresh Milk",
                     style: TextStyle(
                         fontFamily: 'bolt-semibold.ttf',
                         decoration: TextDecoration.none,
@@ -217,7 +220,7 @@ return true;
               alignment: Alignment.bottomLeft,
 
               child: Container(
-    width: 100,
+                width: 100,
                 child: Column(
                   children: [
                     GestureDetector(
