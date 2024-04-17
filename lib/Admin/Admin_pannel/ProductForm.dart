@@ -1,6 +1,4 @@
 
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'DetailsPopup.dart';
@@ -121,17 +119,6 @@ class _ProductFormState extends State<ProductForm> {
                   MaterialStateProperty.all<Color>(Colors.grey),
                 ),
               ),
-              ElevatedButton(
-                onPressed: (){
-                  _showProductInformation(context,product.productId,product.productName,product.price1,product.quantity1,product.price2,product.quantity2,product.price3,product.quantity2);
-
-                },
-                child: Text("Edit",style: TextStyle(color: Colors.white)),
-                style: ButtonStyle(
-                  backgroundColor:
-                  MaterialStateProperty.all<Color>(Colors.lightBlueAccent),
-                ),
-              ),
               IconButton(
                 onPressed: () {
                   remove();
@@ -180,138 +167,4 @@ class _ProductFormState extends State<ProductForm> {
       ),
     );
   }
-
-  void _showProductInformation(BuildContext context, String productId, String productName, String price1, String price2, String price3, String quantity1, String quantity2, String quantity3) {
-    TextEditingController _productIdController = TextEditingController(text: productId);
-    TextEditingController _productNameController = TextEditingController(text: productName);
-    TextEditingController _price1Controller = TextEditingController(text: price1);
-    TextEditingController _price2Controller = TextEditingController(text: price2);
-    TextEditingController _price3Controller = TextEditingController(text: price3);
-    TextEditingController _quantity1Controller = TextEditingController(text: quantity1);
-    TextEditingController _quantity2Controller = TextEditingController(text: quantity2);
-    TextEditingController _quantity3Controller = TextEditingController(text: quantity3);
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-              'Product Information'),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: _productIdController,
-                  decoration: InputDecoration(labelText: 'New Product ID'),
-                ),
-                SizedBox(height: 10,),
-                TextField(
-                  controller: _productNameController,
-                  decoration: InputDecoration(labelText: 'New Product Name'),
-                ),
-                SizedBox(height: 10,),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _price1Controller,
-                        decoration: InputDecoration(labelText: 'New Price1'),
-                      ),
-                    ),
-                    SizedBox(width: 5,),
-                    Expanded(
-                      child: TextField(
-                        controller: _quantity1Controller,
-                        decoration: InputDecoration(labelText: 'New Quantity1'),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10,),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _price2Controller,
-                        decoration: InputDecoration(labelText: 'New Price2'),
-                      ),
-                    ),
-                    SizedBox(width: 5,),
-                    Expanded(
-                      child: TextField(
-                        controller: _quantity2Controller,
-                        decoration: InputDecoration(labelText: 'New Quantity2'),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10,),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _price3Controller,
-                        decoration: InputDecoration(labelText: 'New Price3'),
-                      ),
-                    ),
-                    SizedBox(width: 5,),
-                    Expanded(
-                      child: TextField(
-                        controller: _quantity3Controller,
-                        decoration: InputDecoration(
-                            labelText: 'New Quantity3'),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10,)
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                String newProductId = _productIdController.text;
-                String newProductName = _productNameController.text;
-                String newPrice1 = _price1Controller.text;
-                String newPrice2 = _price2Controller.text;
-                String newPrice3 = _price3Controller.text;
-                String newQuantity1 = _quantity1Controller.text;
-                String newQuantity2 = _quantity2Controller.text;
-                String newQuantity3 = _quantity3Controller.text;
-
-                // Update the productDetails list with the new data
-                productDetails[widget.id] = Product(
-                  productId: newProductId,
-                  productName: newProductName,
-                  price1: newPrice1,
-                  quantity1: newQuantity1,
-                  price2: newPrice2,
-                  quantity2: newQuantity2,
-                  price3: newPrice3,
-                  quantity3: newQuantity3,
-                  isEnable: false,
-                );
-
-                setState(() {});
-
-                Navigator.of(context).pop();
-              },
-              child: Text('Save'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancel'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-
-
 }

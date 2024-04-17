@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dairy/Admin/Admin_pannel/details_model.dart';
+import 'package:dairy/Admin/Admin_pannel/machine_model.dart';
 import 'package:dairy/Screens/thanks.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +21,11 @@ class pricescreen extends StatefulWidget {
 
   int selectedindex;
   String img;
+  MachineInfo machineInfo;
 
   final List<Product> productDetails;
 
-   pricescreen(this.selectedindex,  this.img,this.productDetails);
+   pricescreen(this.selectedindex,  this.img,this.productDetails, this.machineInfo);
 
   @override
   State<pricescreen> createState() => _pricescreenState();
@@ -38,25 +40,6 @@ class _pricescreenState extends State<pricescreen> {
   String product='';
 String pd='';
 String qd='';
-  // int current=0;
-
-  @override
-  // void initState() {
-  //   if(widget.product==0){
-  //     img='assets/images/cow.png';
-  //     product='Cow Milk';
-  //     pp=25;
-  //   }else if(widget.product==1){
-  //     img='assets/images/buffalo_.png';
-  //     product='Buffalo Milk';
-  //     pp=33;
-  //   }
-  //   else{
-  //     img='assets/images/butterMilk_.png';
-  //     product='Butter Milk';
-  //     pp=40;
-  //   }
-  // }
 
   void selectedcard(int index) {
     setState(() {
@@ -155,7 +138,7 @@ String qd='';
                                 SizedBox(width: 90,),
                                 TextButton(onPressed: () {
                                  new model(cardindex, (_selectedcardindex+1).toString());
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => payment(price: pd,)));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => payment(price: pd,machineInfo: widget.machineInfo)));
                                 },
                                   child: Text("Continue",style: TextStyle(
                                     fontSize: 15,

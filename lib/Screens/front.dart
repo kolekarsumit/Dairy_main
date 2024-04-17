@@ -23,34 +23,31 @@ class Front_ extends StatefulWidget {
   const Front_({super.key});
 
   @override
-  State<Front_> createState() => Front_State();
+  State<Front_> createState() => _Front_State();
 }
 
-class Front_State extends State<Front_> with TickerProviderStateMixin {
+class _Front_State extends State<Front_> with TickerProviderStateMixin {
 
   late AnimationController _controller;
   String status = "Connecting";
   bool btConnected = false;
-  late MachineInfo machineInfo;
-
-
+ MachineInfo machineInfo=MachineInfo(isPaymentMode:false, name: '', mobileNo: '', city: '', BTname: '', BTaddress: '', merchantId: '');
   @override
   void initState() {
     super.initState();
+
     loadMachineInfo();
-    machineInfo= MachineInfo(isPaymentMode: false, name: '', mobileNo: '', city: '', BTname: '', BTaddress: '', merchantId: '');
     _controller = AnimationController(
       duration: Duration(milliseconds: 500),
       vsync: this,
     );
     _controller.repeat(reverse: true);
-    print("name is ${machineInfo.name}");
   }
 
 
 
 
-  Future<bool> loadMachineInfo()async{
+  Future<bool> loadMachineInfo() async{
     status=''
         ''
         '';
@@ -61,7 +58,7 @@ class Front_State extends State<Front_> with TickerProviderStateMixin {
     String? machineinfojson=preferences.getString('machineInfo');
     print('Loading machininfo ${machineinfojson}');
     if(machineinfojson !=null){
-      MachineInfo machineInfo = MachineInfo.fromJson(jsonDecode(machineinfojson));
+        machineInfo = MachineInfo.fromJson(jsonDecode(machineinfojson));
       print(machineInfo.BTaddress);
       if(machineInfo.BTaddress.isNotEmpty && blueServices.validateID(machineInfo.BTaddress)){
         bool isConnected =await blueServices.triggerPipelineToConnect(machineInfo.BTaddress);
@@ -79,7 +76,6 @@ class Front_State extends State<Front_> with TickerProviderStateMixin {
       }
 
       setState(() {
-
       });
 
     }
@@ -129,14 +125,20 @@ class Front_State extends State<Front_> with TickerProviderStateMixin {
               child: frostedglass_(
                   theheight: 100.0,
                   thewidth: 650.0,
-                  theChild: Text(
-                    "Farm-Fresh Milk",
-                    style: TextStyle(
-                        fontFamily: 'bolt-semibold.ttf',
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 55,
-                        color: Colors.white),
+                  theChild: ShaderMask(
+                    shaderCallback: (bounds) {
+                      return AppColor.gradient2.createShader(
+                          Rect.fromLTRB(0, 0, bounds.width, bounds.height));
+                    },
+                    child: Text(
+                      machineInfo.name,
+                      style: TextStyle(
+                          fontFamily: 'bolt-semibold.ttf',
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 55,
+                          color: Colors.white),
+                    ),
                   ),
                   thecolor: Colors.transparent),
             ),
@@ -203,7 +205,7 @@ class Front_State extends State<Front_> with TickerProviderStateMixin {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Itemscreen()),
+                          MaterialPageRoute(builder: (context) => Itemscreen(machineInfo)),
                         );
                       },
 

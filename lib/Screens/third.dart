@@ -15,7 +15,8 @@ import 'fourth.dart';
 
 class payment extends StatefulWidget {
   final String price;
-  const payment({super.key, required this.price});
+  final MachineInfo machineInfo;
+  const payment({super.key, required this.price,required this.machineInfo});
 
   @override
   State<payment> createState() => _paymentState();
@@ -29,8 +30,7 @@ class _paymentState extends State<payment> {
     String? machineinfojson=preferences.getString('machineInfo');
     print('Loading machininfo ${machineinfojson}');
     if(machineinfojson !=null){
-      MachineInfo machineInfo = MachineInfo.fromJson(jsonDecode(machineinfojson));
-      Paymentmode=machineInfo.isPaymentMode;
+      Paymentmode=widget.machineInfo.isPaymentMode;
       // free mode
       if(!Paymentmode){
 

@@ -1,12 +1,12 @@
 class Product {
   late final String productId;
   late  String productName;
-  final String price1;
-  final String quantity1;
-  final String price2;
-  final String quantity2;
-  final String price3;
-  final String quantity3;
+  late String price1;
+  late String quantity1;
+  late String price2;
+  late String quantity2;
+  late String price3;
+  late String quantity3;
   bool isEnable;
   double? fat;
   int? calories;

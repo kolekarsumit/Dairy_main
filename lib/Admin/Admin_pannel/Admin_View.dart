@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 import 'package:dairy/Admin/Admin_pannel/navbar.dart';
 import 'package:dairy/Admin/Background/BackgroundScreen.dart';
@@ -14,7 +13,6 @@ import '../../Screens/logoscreen.dart';
 import '../../bluetooth_service/utils/toast_msg.dart';
 import 'Payment.dart';
 import 'ShowProduct.dart';
-import 'demo.dart';
 import 'details_model.dart';
 import 'machine_model.dart';
 
@@ -115,6 +113,7 @@ class _AdminViewState extends State<AdminView> {
       setDefaultDataToController(machineInfo);
     }
   }
+
 
 
   @override
@@ -243,17 +242,7 @@ class _AdminViewState extends State<AdminView> {
                 ),
 
 
-                ElevatedButton(
-                  onPressed: () async {
-                    List<Product> productList = await ProductManager.getProductList();
-                     int indexToEdit = 0;
-                    String newName = 'New Product Name';
-                    await ProductManager.editProductName(indexToEdit, newName);
-                    setState(() {
-                     });
-                  },
-                  child: Text('Edit Product Name'),
-                )
+
 
 
               ],

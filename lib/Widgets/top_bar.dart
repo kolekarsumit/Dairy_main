@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import '../Admin/Admin_pannel/machine_model.dart';
-import '../Admin/theme/colors.dart';
+import '../theme/colors.dart';
 
 class topbar extends StatefulWidget {
   const topbar({Key? key}) : super(key: key);

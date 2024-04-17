@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../Admin/Admin_pannel/details_model.dart';
-import '../Admin/theme/colors.dart';
 class CustomAnimationWidget extends StatefulWidget {
   final Widget child;
   final bool startAnimation;
