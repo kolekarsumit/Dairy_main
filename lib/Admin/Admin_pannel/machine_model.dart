@@ -8,6 +8,9 @@ class MachineInfo{
    String BTname;
    String BTaddress;
    String merchantId;
+   String icon1;
+   String icon2;
+   String background;
 
   MachineInfo({
     required this.isPaymentMode,
@@ -17,6 +20,9 @@ class MachineInfo{
     required this.BTname,
     required this.BTaddress,
     required this.merchantId,
+    required this.icon1,
+    required this.icon2,
+    required this.background
 });
 
   MachineInfo.withinfo({
@@ -27,6 +33,9 @@ class MachineInfo{
     required this.BTname,
     required this.BTaddress,
     required this.merchantId,
+    required this.icon2,
+    required this.icon1,
+    required this.background
 });
 
   Map<String, dynamic> toJson() {
@@ -38,6 +47,9 @@ class MachineInfo{
       'BTname':BTname ?? '',
       'BTaddress':BTaddress ?? '',
       'merchantId':merchantId ?? '',
+      'icon2':icon2??'',
+      'icon1':icon1??'',
+'background':background
     };
   }
   factory MachineInfo.fromJson(Map<String,dynamic>json){
@@ -49,28 +61,10 @@ class MachineInfo{
         BTname: json['BTname'],
         BTaddress: json['BTaddress'],
         merchantId: json['merchantId'],
+        background:json['background']??'',
+        icon1:json['icon1']??'',
+        icon2:json['icon2']??''
     );
-  }
-
-  static Future<void> saveSelectedBackground(String imagePath) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selectedBackground', imagePath);
-  }
-
-  // Function to retrieve the selected background image path from shared preferences
-  static Future<String> getSelectedBackground() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('selectedBackground') ?? "";
-  }
-
-  static Future<void> saveSelectedLogo(String imagePath, String key) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(key, imagePath);
-  }
-
-  static Future<String> getSelectedLogo(String key) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(key) ?? "";
   }
 
 

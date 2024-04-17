@@ -77,9 +77,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
 }
 
 class AdminView extends StatefulWidget {
-  // final Machine machine;
-  // final Function(Machine) callback;
-  // AdminView(this.machine, this.callback);
+  final Function(MachineInfo) callback;
+  AdminView({required this.callback});
 
   @override
   _AdminViewState createState() => _AdminViewState();
@@ -94,26 +93,35 @@ class _AdminViewState extends State<AdminView> {
   TextEditingController          merchandIdController=TextEditingController();
 
 
-  File? _logo1;
-  File? _logo2;
+
   @override
   void initState(){
     super.initState();
     loadMachineInfo();
-    print(_logo1);
-    print(_logo2);
-
   }
+  MachineInfo machineInfo=MachineInfo(
+      isPaymentMode:false,
+      icon1: '',
+      icon2: '',
+      background: '',
+      name: '',
+      mobileNo: '',
+      city: '',
+      BTname: '',
+      BTaddress: '',
+      merchantId: '');
+
   void loadMachineInfo()async{
     SharedPreferences preferences=await SharedPreferences.getInstance();
     String? machineinfojson=preferences.getString('machineInfo');
     print('Loading machininfo ${machineinfojson}');
     if(machineinfojson !=null){
-      MachineInfo machineInfo = MachineInfo.fromJson(jsonDecode(machineinfojson));
-      setDefaultDataToController(machineInfo);
+       machineInfo = MachineInfo.fromJson(jsonDecode(machineinfojson));
+       setState(() {
+      });
+       setDefaultDataToController(machineInfo);
     }
   }
-
 
 
   @override
@@ -123,19 +131,27 @@ class _AdminViewState extends State<AdminView> {
   }
 
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          backscreen(),
+          backscreen(
+            machineInfo: machineInfo,
+          ),
           SingleChildScrollView(
             child: Column(
               children: [
-                nav_(),
+                nav_(
+                  callback: (info){
+                    machineInfo=info;
+                    widget. callback(info);
+                    setState(() {
+
+                    });
+                  },
+                  machineInfo: machineInfo,
+                ),
                 SizedBox(height: 30),
                 CustomTextField(
                   label: "Name",
@@ -230,20 +246,26 @@ class _AdminViewState extends State<AdminView> {
                     fontSize: 20,
                     fontWeight: FontWeight.bold
                 ),),
-                back(),
+                back(
+                  callback: (info){
+                    machineInfo=info;
+                    widget.callback(info);
+                    setState(() {
+                    });
+                  },
+                  machineInfo: machineInfo,
+                ),
 
 
                 SizedBox(height: 100,),
 
                 LogoSelector(
-                  initialLogo1: _logo1,
-                  initialLogo2: _logo2,
-                  onLogoSelection: _handleLogoSelection,
+                 callback: (info){
+                   machineInfo=info;
+                   widget.callback(info);
+                 },
+                  machineInfo: machineInfo,
                 ),
-
-
-
-
 
               ],
             ),
@@ -252,12 +274,7 @@ class _AdminViewState extends State<AdminView> {
       ),
     );
   }
-  void _handleLogoSelection(File? logo1, File? logo2) {
-    setState(() {
-      _logo1 = logo1;
-      _logo2 = logo2;
-    });
-  }
+
 
   MachineInfo getMachineInfo(){
     String nameStr=  nameController.text.toString();
@@ -266,20 +283,24 @@ class _AdminViewState extends State<AdminView> {
     String  BTnameStr= BTnameController.text.toString();
     String  BTaddressStr=BTaddressController.text.toString();
     String  merchandIdStr=merchandIdController.text.toString();
-    MachineInfo machineInfo=MachineInfo(
+    MachineInfo machine=MachineInfo(
         isPaymentMode: true,
         name: nameStr,
         mobileNo: mobileStr,
         city: cityStr,
         BTname: BTnameStr,
         BTaddress: BTaddressStr,
+        icon2: machineInfo.icon1,
+        icon1: machineInfo.icon1,
+        background: machineInfo.background,
         merchantId: merchandIdStr);
-    return machineInfo;
+    return machine;
   }
 
   void saveMachineInfo()async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    MachineInfo machineInfo=getMachineInfo();
+     machineInfo=getMachineInfo();
+
     if(!blueServices.validateID(machineInfo.BTaddress)){
       toastMessage('Please Enter Valid BT Address');
       return;
@@ -288,7 +309,8 @@ class _AdminViewState extends State<AdminView> {
     print(machineInfoJson);
     prefs.setString('machineInfo', machineInfoJson);
     toastMessage('Saved Successfully !');
-
+    setState(() {
+    });
   }
 
   void setDefaultDataToController(MachineInfo machineInfo) {

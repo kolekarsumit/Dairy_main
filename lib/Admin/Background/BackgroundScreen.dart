@@ -1,10 +1,16 @@
+import 'dart:convert';
 import 'dart:io'; // Import 'dart:io' for File
+import 'package:dairy/Admin/Admin_pannel/machine_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../bluetooth_service/utils/toast_msg.dart';
+
 class back extends StatefulWidget {
-  const back({Key? key}) : super(key: key);
+  MachineInfo machineInfo;
+  Function(MachineInfo) callback;
+   back({required this.machineInfo,required this.callback}) ;
 
   @override
   State<back> createState() => _BackState();
@@ -45,8 +51,8 @@ class _BackState extends State<back> {
 
   // Function to update shared preferences with selected image path
   void selectBackground(String imagePath) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selectedBackground', imagePath);
+    widget.machineInfo.background=imagePath;
+    saveMachineInfo(widget.machineInfo);
     setState(() {
       _selectedImagePath = imagePath;
     }); // Trigger rebuild to reflect changes in backscreen
@@ -58,5 +64,15 @@ class _BackState extends State<back> {
     if (pickedFile != null) {
       selectBackground(pickedFile.path);
     }
+  }
+  void saveMachineInfo(MachineInfo info)async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String machineInfoJson = jsonEncode(info);
+    print(machineInfoJson);
+    prefs.setString('machineInfo', machineInfoJson);
+    widget.callback(widget.machineInfo);
+    toastMessage('Saved Successfully !');
+
   }
 }

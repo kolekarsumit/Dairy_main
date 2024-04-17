@@ -5,34 +5,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'machine_model.dart';
 
 class PaymentContainer extends StatefulWidget {
+  MachineInfo machineInfo;
+  Function(MachineInfo) callback;
+  PaymentContainer({required this.machineInfo,required this.callback});
+
   @override
   _PaymentContainerState createState() => _PaymentContainerState();
 }
 
 class _PaymentContainerState extends State<PaymentContainer> {
   bool isPaymentMode = true;
-   MachineInfo machineInfo=MachineInfo(isPaymentMode: true, name: '', mobileNo: '', city: '', BTname: '', BTaddress: '', merchantId: '');
   @override
   void initState(){
     super.initState();
-    loadMachineInfo();
-
-  }
-  Future<bool> loadMachineInfo()async{
-    SharedPreferences preferences=await SharedPreferences.getInstance();
-    String? machineinfojson=preferences.getString('machineInfo');
-    print('Loading machininfo ${machineinfojson}');
-    if(machineinfojson !=null){
-       machineInfo = MachineInfo.fromJson(jsonDecode(machineinfojson));
-       isPaymentMode=machineInfo.isPaymentMode;
-       setState(() {
-       });
-    }
-    return true;
   }
 
   void toggleMode() async{
-    await loadMachineInfo();
 
     setState(() {
       isPaymentMode = !isPaymentMode;
@@ -69,8 +57,9 @@ class _PaymentContainerState extends State<PaymentContainer> {
   }
   void saveMachineInfo()async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    machineInfo.isPaymentMode=isPaymentMode;
-    String machineInfoJson = jsonEncode(machineInfo);
+    widget.machineInfo.isPaymentMode=isPaymentMode;
+    widget.callback(widget.machineInfo);
+    String machineInfoJson = jsonEncode(widget.machineInfo);
     print('updated info ${machineInfoJson}');
     prefs.setString('machineInfo', machineInfoJson);
   }

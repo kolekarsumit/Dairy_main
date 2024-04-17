@@ -4,21 +4,20 @@ import '../Admin/Admin_pannel/machine_model.dart';
 import '../theme/colors.dart';
 
 class topbar extends StatefulWidget {
-  const topbar({Key? key}) : super(key: key);
+  MachineInfo machineInfo;
+   topbar({required this.machineInfo}) ;
 
   @override
   _TopBarState createState() => _TopBarState();
 }
 
 class _TopBarState extends State<topbar> {
-  late Future<String> _logo1Future;
-  late Future<String> _logo2Future;
+
 
   @override
   void initState() {
     super.initState();
-    _logo1Future = MachineInfo.getSelectedLogo('Logo1');
-    _logo2Future = MachineInfo.getSelectedLogo('Logo2');
+
   }
 
   @override
@@ -30,22 +29,11 @@ class _TopBarState extends State<topbar> {
           Container(
             width: 350,
             height: 150,
-            child: FutureBuilder<String>(
-              future: _logo1Future,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                } else {
-                  final logoPath = snapshot.data;
-                  return logoPath != null
-                      ? CircleAvatar(
-                    radius: 50.0,
-                    backgroundImage: FileImage(File(logoPath)),
-                  )
-                      : SizedBox(); // Placeholder or default logo widget
-                }
-              },
-            ),
+            child: widget.machineInfo.icon1.isNotEmpty? CircleAvatar(
+              radius: 50.0,
+              backgroundImage: FileImage(File(widget.machineInfo.icon1)),
+            )
+              : SizedBox(),
           ),
           Container(
             width: 5,
@@ -65,22 +53,11 @@ class _TopBarState extends State<topbar> {
           Container(
             width: 220,
             height: 150,
-            child: FutureBuilder<String>(
-              future: _logo2Future,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                } else {
-                  final logoPath = snapshot.data;
-                  return logoPath != null
-                      ? CircleAvatar(
-                    radius: 50.0,
-                    backgroundImage: FileImage(File(logoPath)),
-                  )
-                      : SizedBox(); // Placeholder or default logo widget
-                }
-              },
-            ),
+            child: widget.machineInfo.icon2.isNotEmpty? CircleAvatar(
+              radius: 50.0,
+              backgroundImage: FileImage(File(widget.machineInfo.icon2)),
+            )
+                : SizedBox(),
           ),
         ],
       ),

@@ -25,13 +25,10 @@ class payment extends StatefulWidget {
 class _paymentState extends State<payment> {
   bool Paymentmode=true;
 
-  void loadMachineInfo() async{
-    SharedPreferences preferences=await SharedPreferences.getInstance();
-    String? machineinfojson=preferences.getString('machineInfo');
-    print('Loading machininfo ${machineinfojson}');
-    if(machineinfojson !=null){
+  void initalizePayment() async{
+
       Paymentmode=widget.machineInfo.isPaymentMode;
-      // free mode
+
       if(!Paymentmode){
 
         // print(model.characters);
@@ -48,28 +45,24 @@ class _paymentState extends State<payment> {
           setState(() {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => fourth_()),
+              MaterialPageRoute(builder: (context) => fourth_(
+                machineInfo: widget.machineInfo,
+              )),
             );
           });
         });
       }
-
       else{
-
-        //check payment success
-
-
       }
-
       setState(() {
       });
-    }
+
+
   }
   // BlueServices blueServices=BlueServices();
   void initState() {
     super.initState();
-    loadMachineInfo();
-
+    initalizePayment();
     // Wait for 10 seconds and then navigate to the second screen
     print(model.characters);
     print(Paymentmode);
@@ -86,13 +79,15 @@ class _paymentState extends State<payment> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          backscreen(),
+          backscreen(
+            machineInfo: widget.machineInfo,
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(height: 10,),
-              topbar(),
+              topbar(machineInfo: widget.machineInfo,),
               SizedBox(height: 20,),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -7,19 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../bluetooth_service/utils/toast_msg.dart';
+
 class LogoSelector extends StatefulWidget {
   @override
 
-  final File? initialLogo1;
-  final File? initialLogo2;
-  final Function(File?, File?) onLogoSelection;
 
-  const LogoSelector({
-    Key? key,
-    this.initialLogo1,
-    this.initialLogo2,
-    required this.onLogoSelection,
-  }): super(key: key);
+  Function(MachineInfo) callback;
+  MachineInfo machineInfo;
+   LogoSelector({
+    required this.machineInfo,
+    required this.callback
+  });
   _LogoSelectorState createState() => _LogoSelectorState();
 }
 
@@ -36,11 +35,13 @@ class _LogoSelectorState extends State<LogoSelector> {
       setState(() {
         if (buttonIndex == 1) {
           _image1 = File(pickedFile.path);
-          MachineInfo.saveSelectedLogo(pickedFile.path, 'Logo1'); // Save selected logo path with key 'Logo1'
+          widget.machineInfo.icon1=_image1!.path;
+          // Save selected logo path with key 'Logo1'
         } else {
           _image2 = File(pickedFile.path);
-          MachineInfo.saveSelectedLogo(pickedFile.path, 'Logo2'); // Save selected logo path with key 'Logo2'
+          widget.machineInfo.icon2=_image2!.path;
         }
+        saveMachineInfo(widget.machineInfo);
       });
     }
   }
@@ -58,22 +59,13 @@ class _LogoSelectorState extends State<LogoSelector> {
                   child: Text('Select Logo 1'),
                 ),
                 SizedBox(height: 50,),
-                FutureBuilder<String>(
-                  future: MachineInfo.getSelectedLogo('Logo1'),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
-                    } else {
-                      final logoPath = snapshot.data;
-                      return logoPath != null
-                          ? CircleAvatar(
-                        radius: 50.0,
-                        backgroundImage: FileImage(File(logoPath)),
-                      )
-                          : SizedBox(); // Placeholder or default logo widget
-                    }
-                  },
-                ),
+               widget.machineInfo.icon1.isNotEmpty? CircleAvatar(
+                  radius: 50.0,
+                  backgroundImage: FileImage(File(widget.machineInfo.icon1)),
+                ):CircleAvatar(
+                 radius: 50.0,
+                 backgroundColor: Colors.black12,
+               )
               ],
             ),
 
@@ -85,29 +77,28 @@ class _LogoSelectorState extends State<LogoSelector> {
                 ),
 
                 SizedBox(height: 50,),
-                FutureBuilder<String>(
-                  future: MachineInfo.getSelectedLogo('Logo2'),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
-                    } else {
-                      final logoPath = snapshot.data;
-                      return logoPath != null
-                          ? CircleAvatar(
-                        radius: 50.0,
-                        backgroundImage: FileImage(File(logoPath)),
-                      )
-                          : SizedBox(); // Placeholder or default logo widget
-                    }
-                  },
-                ),
+                widget.machineInfo.icon2.isNotEmpty? CircleAvatar(
+                  radius: 50.0,
+                  backgroundImage: FileImage(File(widget.machineInfo.icon2)),
+                ):CircleAvatar(
+                  radius: 50.0,
+                  backgroundColor: Colors.black12,
+                )
               ],
             ),
           ],
         );
 
   }
-  void _passLogoInformation() {
-    widget.onLogoSelection(_image1, _image2);
+  void saveMachineInfo(MachineInfo info)async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String machineInfoJson = jsonEncode(info);
+    print(machineInfoJson);
+    prefs.setString('machineInfo', machineInfoJson);
+    widget.callback(widget.machineInfo);
+    toastMessage('Saved Successfully !');
+
   }
+
 }

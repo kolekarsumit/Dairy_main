@@ -20,7 +20,7 @@ import '../Widgets/top_bar.dart';
 import '../main.dart';
 
 class Front_ extends StatefulWidget {
-  const Front_({super.key});
+
 
   @override
   State<Front_> createState() => _Front_State();
@@ -31,7 +31,7 @@ class _Front_State extends State<Front_> with TickerProviderStateMixin {
   late AnimationController _controller;
   String status = "Connecting";
   bool btConnected = false;
- MachineInfo machineInfo=MachineInfo(isPaymentMode:false, name: '', mobileNo: '', city: '', BTname: '', BTaddress: '', merchantId: '');
+ MachineInfo machineInfo=MachineInfo(isPaymentMode:true, name: '', mobileNo: '', city: '', BTname: '', BTaddress: '', merchantId: '',icon1: '',icon2: '',background: '');
   @override
   void initState() {
     super.initState();
@@ -41,6 +41,7 @@ class _Front_State extends State<Front_> with TickerProviderStateMixin {
       duration: Duration(milliseconds: 500),
       vsync: this,
     );
+
     _controller.repeat(reverse: true);
   }
 
@@ -48,9 +49,7 @@ class _Front_State extends State<Front_> with TickerProviderStateMixin {
 
 
   Future<bool> loadMachineInfo() async{
-    status=''
-        ''
-        '';
+    status='';
     btConnected=false;
     setState(() {
     });
@@ -60,6 +59,8 @@ class _Front_State extends State<Front_> with TickerProviderStateMixin {
     if(machineinfojson !=null){
         machineInfo = MachineInfo.fromJson(jsonDecode(machineinfojson));
       print(machineInfo.BTaddress);
+        setState(() {
+        });
       if(machineInfo.BTaddress.isNotEmpty && blueServices.validateID(machineInfo.BTaddress)){
         bool isConnected =await blueServices.triggerPipelineToConnect(machineInfo.BTaddress);
         if(isConnected){
@@ -75,8 +76,8 @@ class _Front_State extends State<Front_> with TickerProviderStateMixin {
 
       }
 
-      setState(() {
-      });
+        setState(() {
+        });
 
     }
     return true;
@@ -99,13 +100,15 @@ class _Front_State extends State<Front_> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        backscreen(),
+        backscreen(
+          machineInfo: machineInfo,
+        ),
         Column(
           children: [
             SizedBox(
               height: 20,
             ),
-            topbar(),
+            topbar(machineInfo: machineInfo,),
             SizedBox(
               height: 30,
             ),
@@ -116,7 +119,15 @@ class _Front_State extends State<Front_> with TickerProviderStateMixin {
                   tapcount++;
                   print(tapcount);
                   if(tapcount==5){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> PinCodeWidget()),);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> PinCodeWidget(
+                        callback: (info){
+                          machineInfo=info;
+                          print('callback ${machineInfo.toJson()}');
+                          setState(() {
+                          });
+                        },
+                      )),);
+
                     tapcount =0;
                   }
                 });

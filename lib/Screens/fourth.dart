@@ -1,10 +1,12 @@
+import 'package:dairy/Admin/Admin_pannel/machine_model.dart';
 import 'package:dairy/Screens/front.dart';
 import 'package:dairy/Screens/thanks.dart';
 import 'package:dairy/theme/background.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 class fourth_ extends StatefulWidget {
-  const fourth_({super.key});
+   MachineInfo machineInfo;
+   fourth_({required this.machineInfo});
 
   @override
   State<fourth_> createState() => _fourthState();
@@ -19,7 +21,9 @@ class _fourthState extends State<fourth_> {
       setState(() {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => thanks_()),
+          MaterialPageRoute(builder: (context) => thanks_(
+            machineInfo: widget.machineInfo,
+          )),
         );
       });
     });
@@ -30,7 +34,9 @@ class _fourthState extends State<fourth_> {
 
       body: Stack(
         children: [
-          backscreen(),
+          backscreen(
+            machineInfo: widget.machineInfo,
+          ),
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,

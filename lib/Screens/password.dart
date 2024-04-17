@@ -3,7 +3,8 @@ import 'package:dairy/Admin/Admin_pannel/machine_model.dart';
 import 'package:flutter/material.dart';
 
 class PinCodeWidget extends StatefulWidget {
-  const PinCodeWidget({Key? key});
+  Function(MachineInfo) callback;
+   PinCodeWidget({required this.callback});
 
   @override
   State<PinCodeWidget> createState() => _PinCodeWidgetState();
@@ -13,7 +14,6 @@ class _PinCodeWidgetState extends State<PinCodeWidget> {
   String correctPassword = '1234';
   String enteredPin = '';
   bool isPinVisible = false;
-  // late Function(Machine) callback;
 
   Widget numButton(int number) {
     return Padding(
@@ -44,6 +44,9 @@ class _PinCodeWidgetState extends State<PinCodeWidget> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => AdminView(
+          callback: (info){
+            widget.callback(info);
+          },
         )),
       );
     } else {
@@ -132,6 +135,7 @@ class _PinCodeWidgetState extends State<PinCodeWidget> {
                 setState(() {
                   isPinVisible = !isPinVisible;
                 });
+
               },
               icon: Icon(
                 isPinVisible ? Icons.visibility_off : Icons.visibility,

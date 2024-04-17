@@ -15,7 +15,7 @@ import '../Admin/Admin_pannel/details_model.dart';
 
 class Itemscreen extends StatefulWidget {
   MachineInfo machineInfo;
-   Itemscreen( this.machineInfo, {Key? key}) : super(key: key);
+  Itemscreen( this.machineInfo, {Key? key}) : super(key: key);
 
   @override
   State<Itemscreen> createState() => _ItemscreenState();
@@ -63,33 +63,41 @@ class _ItemscreenState extends State<Itemscreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          backscreen(),
+          backscreen(
+            machineInfo: widget.machineInfo,
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 20,),
-              topbar(),
-              SizedBox(height: 80,),
+              topbar(machineInfo: widget.machineInfo,),
+              SizedBox(height: 50,),
               Expanded(
                 // Use Expanded directly here
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: productDetails.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: (){
-                        selectedcardindex=index;
-                        setState(() {});
-                      },
-                      child: Padding(
-                          padding:EdgeInsets.all(12),
-                          child: productDetails[index].isEnable?item_card(productDetails[index], img[index%3], selectedcardindex==index):Container()),
-                    );
-                  },
+                child: Scrollbar(
+                  thumbVisibility: true,
+                  thickness: 4.0,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        for(int index=0;index<productDetails.length;index++)
+                          GestureDetector(
+                            onTap: (){
+                              selectedcardindex=index;
+                              setState(() {});
+                            },
+                            child: Padding(
+                                padding:EdgeInsets.all(8),
+                                child: productDetails[index].isEnable?item_card(productDetails[index], img[index%3], selectedcardindex==index):Container()),
+                          ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-              SizedBox(height:20),
+              SizedBox(height:10),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -112,7 +120,7 @@ class _ItemscreenState extends State<Itemscreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => pricescreen(selectedcardindex,img[selectedcardindex%3],productDetails,widget.machineInfo),
-                          ),
+                            ),
                           );
                         }
                       },
@@ -125,7 +133,6 @@ class _ItemscreenState extends State<Itemscreen> {
                 ],
               ),
 
-              SizedBox(height: 20,)
             ],
           ),
         ],

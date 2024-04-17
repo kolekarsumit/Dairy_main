@@ -78,13 +78,15 @@ String qd='';
       body: Stack(
         fit: StackFit.expand,
         children: [
-          backscreen(),
+          backscreen(
+            machineInfo: widget.machineInfo,
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(height: 20,),
-              topbar(),
+              topbar(machineInfo: widget.machineInfo,),
               SizedBox(height: 30,),
               Align(
                 alignment: Alignment.center,

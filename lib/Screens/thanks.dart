@@ -1,3 +1,4 @@
+import 'package:dairy/Admin/Admin_pannel/machine_model.dart';
 import 'package:dairy/Screens/front.dart';
 import 'package:dairy/Widgets/top_bar.dart';
 import 'package:dairy/theme/background.dart';
@@ -6,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class thanks_ extends StatefulWidget {
-  const thanks_({super.key});
+  MachineInfo machineInfo;
+   thanks_({required this.machineInfo});
   @override
   State<thanks_> createState() => _thanks_State();
 }
@@ -19,7 +21,8 @@ class _thanks_State extends State<thanks_> {
       setState(() {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => Front_()),
+          MaterialPageRoute(builder: (context) => Front_(
+          )),
         );
       });
     });
@@ -30,11 +33,13 @@ class _thanks_State extends State<thanks_> {
     return Scaffold(
       body: Stack(
         children: [
-          backscreen(),
+          backscreen(
+            machineInfo: widget.machineInfo,
+          ),
           Column(
             children: [
               SizedBox(height: 10,),
-              topbar(),
+              topbar(machineInfo: widget.machineInfo,),
               SizedBox(height: 30,),
               Container(
                 height: 250,
