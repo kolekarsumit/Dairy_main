@@ -4,7 +4,10 @@ import 'package:dairy/Widgets/top_bar.dart';
 import 'package:dairy/theme/background.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:lottie/lottie.dart';
+
+import '../models/Textmodel.dart';
 
 class thanks_ extends StatefulWidget {
   MachineInfo machineInfo;
@@ -26,6 +29,13 @@ class _thanks_State extends State<thanks_> {
         );
       });
     });
+    speak(thanks);
+  }
+  FlutterTts _flutterTts=FlutterTts();
+  speak(String text) {
+    _flutterTts.setLanguage("eu-US");
+    _flutterTts.setPitch(1);
+    _flutterTts.speak(text);
   }
 
   @override

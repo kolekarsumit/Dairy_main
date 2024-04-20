@@ -50,7 +50,7 @@ class price extends StatelessWidget {
 
               SizedBox(height: 10,),
 
-              Text("${quantity} ML",style: TextStyle(
+              Text("${quantity} ",style: TextStyle(
                   color: Colors.white,
                   fontSize: 30,
                 fontFamily: 'bolt-semibold.ttf',

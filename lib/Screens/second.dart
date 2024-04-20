@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:dairy/Admin/Admin_pannel/details_model.dart';
 import 'package:dairy/Admin/Admin_pannel/machine_model.dart';
 import 'package:dairy/Screens/thanks.dart';
@@ -16,6 +17,7 @@ import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/Datamodel.dart';
+import '../models/Textmodel.dart';
 
 class pricescreen extends StatefulWidget {
 
@@ -59,6 +61,13 @@ String qd='';
     });
   }
 
+
+  FlutterTts _flutterTts=FlutterTts();
+  speak(String text) {
+    _flutterTts.setLanguage("eu-US");
+    _flutterTts.setPitch(1);
+    _flutterTts.speak(text);
+  }
   @override
   void initState() {
     super.initState();
@@ -66,6 +75,7 @@ String qd='';
     cardindex=widget.selectedindex;
     print("selected index is : ${widget.selectedindex}");
     productDetails = widget.productDetails;
+    speak(second);
 
   }
 

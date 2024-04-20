@@ -92,34 +92,35 @@ class _paymentState extends State<payment> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Milk Despensor LTD",style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'bolt-regular.ttf'
-                  ),),
+
                   SizedBox(height: 5,),
-                  Text("\$${widget.price}",style: TextStyle(fontSize: 30,
+                  Text("Your Order Total is : RS ${widget.price}",style: TextStyle(fontSize: 30,
                     fontFamily: 'bolt-regular.ttf',
+                    fontWeight: FontWeight.bold,
                   ),),
-                  SizedBox(height: 5,),
+                  SizedBox(height: 15,),
                   Text("Payment Referance",style: TextStyle(
                       fontSize: 15, fontFamily: 'bolt-regular.ttf'
                   ),),
-                  SizedBox(height: 35,),
+                  SizedBox(height: 10,),
 
                   Container(
                     width: 250,
                     height: 250,
                     child: Image.asset("assets/images/qr.jpg"),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(height: 5),
                   Text("Remaing Time : ${time}",style: TextStyle(
                       fontSize: 15, fontFamily: 'bolt-regular.ttf'
                   ),),
-                  SizedBox(height: 10,),
+                  SizedBox(height:5,),
                   Text("Status : Waiting",style: TextStyle(
                       fontSize: 15,
                       fontFamily: 'bolt-regular.ttf'
-                  ),)
+                  ),),
+                  SizedBox(height: 5,),
+                  Image.asset("assets/images/pay-removebg-preview.png"),
+                  SizedBox(height: 10,),
                 ],
               ),
 

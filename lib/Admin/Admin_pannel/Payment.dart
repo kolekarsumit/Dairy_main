@@ -14,7 +14,7 @@ class PaymentContainer extends StatefulWidget {
 }
 
 class _PaymentContainerState extends State<PaymentContainer> {
-  bool isPaymentMode = true;
+  bool isPaymentMode = false;
   @override
   void initState(){
     super.initState();

@@ -29,12 +29,20 @@ class _TopBarState extends State<topbar> {
           Container(
             width: 350,
             height: 150,
-            child: widget.machineInfo.icon1.isNotEmpty? CircleAvatar(
-              radius: 50.0,
-              backgroundImage: FileImage(File(widget.machineInfo.icon1)),
+            child: widget.machineInfo.icon1.isNotEmpty ? Container(
+              width: 100.0, // Adjust width as needed
+              height: 100.0, // Adjust height as needed
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0), // Adjust border radius as needed
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: FileImage(File(widget.machineInfo.icon1)),
+                ),
+              ),
             )
-              : SizedBox(),
+                : SizedBox(),
           ),
+
           Container(
             width: 5,
           ),
@@ -51,14 +59,22 @@ class _TopBarState extends State<topbar> {
           ),
           SizedBox(width: 5),
           Container(
-            width: 220,
+            width: 350,
             height: 150,
-            child: widget.machineInfo.icon2.isNotEmpty? CircleAvatar(
-              radius: 50.0,
-              backgroundImage: FileImage(File(widget.machineInfo.icon2)),
+            child: widget.machineInfo.icon2.isNotEmpty ? Container(
+              width: 100.0, // Adjust width as needed
+              height: 100.0, // Adjust height as needed
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0), // Adjust border radius as needed
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: FileImage(File(widget.machineInfo.icon2)),
+                ),
+              ),
             )
                 : SizedBox(),
           ),
+
         ],
       ),
     );

@@ -71,7 +71,7 @@ class _item_cardState extends State<item_card> with TickerProviderStateMixin {
       ),
       margin: EdgeInsets.only(left: 60),
       width: 330,
-      height: 200,
+      height: 300,
 
       child: Padding(
         padding: EdgeInsets.all(15),

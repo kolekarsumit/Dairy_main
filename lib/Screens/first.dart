@@ -5,12 +5,13 @@ import 'package:dairy/Screens/second.dart';
 import 'package:dairy/Widgets/top_bar.dart';
 import 'package:dairy/cards/itemcard.dart';
 import 'package:dairy/cards/nextBTN.dart';
+import 'package:dairy/models/Textmodel.dart';
 import 'package:dairy/theme/background.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_tts/flutter_tts.dart';
 import '../Admin/Admin_pannel/details_model.dart';
 
 class Itemscreen extends StatefulWidget {
@@ -31,6 +32,13 @@ class _ItemscreenState extends State<Itemscreen> {
     });
   }
 
+  FlutterTts _flutterTts=FlutterTts();
+  speak(String text) {
+    _flutterTts.setLanguage("eu-US");
+    _flutterTts.setPitch(1);
+    _flutterTts.speak(text);
+  }
+
   List<Product> productDetails = [];
   List<String> img=[
     "assets/images/cow.png",
@@ -41,6 +49,7 @@ class _ItemscreenState extends State<Itemscreen> {
   void initState() {
     super.initState();
     loadProductList();
+    speak(first);
 
   }
   void loadProductList() async {

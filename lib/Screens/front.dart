@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:dairy/Admin/Admin_pannel/Admin_View.dart';
 import 'package:dairy/Screens/first.dart';
 import 'package:dairy/Screens/password.dart';
 import 'package:dairy/bluetooth_service/services/blue_services.dart';
+import 'package:dairy/models/Textmodel.dart';
 import 'package:dairy/theme/background.dart';
 import 'package:dairy/theme/colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,6 +18,7 @@ import '../Widgets/frostedglass.dart';
 import '../Widgets/ordernow.dart';
 import '../Widgets/top_bar.dart';
 import '../main.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class Front_ extends StatefulWidget {
 
@@ -42,7 +43,16 @@ class _Front_State extends State<Front_> with TickerProviderStateMixin {
       vsync: this,
     );
 
+    speak(welcome);
     _controller.repeat(reverse: true);
+  }
+
+
+  FlutterTts _flutterTts=FlutterTts();
+  speak(String text) {
+    _flutterTts.setLanguage("eu-US");
+    _flutterTts.setPitch(1);
+    _flutterTts.speak(text);
   }
 
 

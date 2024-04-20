@@ -1,9 +1,11 @@
 import 'package:dairy/Admin/Admin_pannel/machine_model.dart';
 import 'package:dairy/Screens/front.dart';
 import 'package:dairy/Screens/thanks.dart';
+import 'package:dairy/models/Textmodel.dart';
 import 'package:dairy/theme/background.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 class fourth_ extends StatefulWidget {
    MachineInfo machineInfo;
    fourth_({required this.machineInfo});
@@ -27,6 +29,13 @@ class _fourthState extends State<fourth_> {
         );
       });
     });
+    speak(waiting);
+  }
+  FlutterTts _flutterTts=FlutterTts();
+  speak(String text) {
+    _flutterTts.setLanguage("eu-US");
+    _flutterTts.setPitch(1);
+    _flutterTts.speak(text);
   }
   @override
   Widget build(BuildContext context) {
