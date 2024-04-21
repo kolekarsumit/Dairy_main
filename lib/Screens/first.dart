@@ -48,6 +48,7 @@ class _ItemscreenState extends State<Itemscreen> {
   @override
   void initState() {
     super.initState();
+    print('first screen machineinfo modle ${widget.machineInfo.toJson()}');
     loadProductList();
     speak(first);
 

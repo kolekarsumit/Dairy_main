@@ -14,19 +14,19 @@ class PaymentContainer extends StatefulWidget {
 }
 
 class _PaymentContainerState extends State<PaymentContainer> {
-  bool isPaymentMode = false;
   @override
   void initState(){
     super.initState();
+
   }
 
   void toggleMode() async{
 
     setState(() {
-      isPaymentMode = !isPaymentMode;
+      widget.machineInfo.isPaymentMode=!widget.machineInfo.isPaymentMode;
       saveMachineInfo();
     });
-    String mode=isPaymentMode?'Payment Mode':'Free Mode';
+    String mode=widget.machineInfo.isPaymentMode?'Payment Mode':'Free Mode';
     toastMessage('Switching to ${mode}');
 
   }
@@ -45,7 +45,7 @@ class _PaymentContainerState extends State<PaymentContainer> {
         ),
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
         child: Text(
-          isPaymentMode ? "Payment Mode" : "Free Mode",
+          widget.machineInfo.isPaymentMode ?"Payment Mode":"Free Mode",
           style: TextStyle(
             color: Colors.black,
             fontSize: 16,
@@ -57,10 +57,10 @@ class _PaymentContainerState extends State<PaymentContainer> {
   }
   void saveMachineInfo()async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    widget.machineInfo.isPaymentMode=isPaymentMode;
-    widget.callback(widget.machineInfo);
     String machineInfoJson = jsonEncode(widget.machineInfo);
     print('updated info ${machineInfoJson}');
     prefs.setString('machineInfo', machineInfoJson);
+    widget.callback(widget.machineInfo);
+
   }
 }

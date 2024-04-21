@@ -72,6 +72,8 @@ String qd='';
   void initState() {
     super.initState();
     // loadProductList();
+    print('second screen machineinfo modle ${widget.machineInfo.toJson()}');
+
     cardindex=widget.selectedindex;
     print("selected index is : ${widget.selectedindex}");
     productDetails = widget.productDetails;

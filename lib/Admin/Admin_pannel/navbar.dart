@@ -20,6 +20,7 @@ class nav_ extends StatelessWidget {
               callback: (info){
                 machineInfo=info;
                 callback(info);
+                print('navbar page callback');
               },
               machineInfo:machineInfo,
             ),

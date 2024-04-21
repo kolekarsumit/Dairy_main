@@ -23,15 +23,11 @@ class payment extends StatefulWidget {
 }
 
 class _paymentState extends State<payment> {
-  bool Paymentmode=true;
 
   void initalizePayment() async{
 
-      Paymentmode=widget.machineInfo.isPaymentMode;
 
-      if(!Paymentmode){
-
-        // print(model.characters);
+      if(!widget.machineInfo.isPaymentMode){
 
         String modelstr = model.characters.toString();
         modelstr = modelstr.replaceAll("[", "{");
@@ -65,8 +61,8 @@ class _paymentState extends State<payment> {
     initalizePayment();
     // Wait for 10 seconds and then navigate to the second screen
     print(model.characters);
-    print(Paymentmode);
 
+    print('third screen machineinfo modle ${widget.machineInfo.toJson()}');
 
 
 

@@ -132,7 +132,7 @@ class _Front_State extends State<Front_> with TickerProviderStateMixin {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=> PinCodeWidget(
                         callback: (info){
                           machineInfo=info;
-                          print('callback ${machineInfo.toJson()}');
+                          print('front sccreen callback ${machineInfo.toJson()}');
                           setState(() {
                           });
                         },

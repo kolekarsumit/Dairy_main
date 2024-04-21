@@ -145,9 +145,9 @@ class _AdminViewState extends State<AdminView> {
                 nav_(
                   callback: (info){
                     machineInfo=info;
-                    widget. callback(info);
+                    widget.callback(info);
+                    print('admin page callback');
                     setState(() {
-
                     });
                   },
                   machineInfo: machineInfo,
@@ -284,7 +284,7 @@ class _AdminViewState extends State<AdminView> {
     String  BTaddressStr=BTaddressController.text.toString();
     String  merchandIdStr=merchandIdController.text.toString();
     MachineInfo machine=MachineInfo(
-        isPaymentMode: true,
+        isPaymentMode: machineInfo.isPaymentMode,
         name: nameStr,
         mobileNo: mobileStr,
         city: cityStr,
@@ -309,6 +309,8 @@ class _AdminViewState extends State<AdminView> {
     print(machineInfoJson);
     prefs.setString('machineInfo', machineInfoJson);
     toastMessage('Saved Successfully !');
+    widget.callback(machineInfo);
+    print('admin page callback');
     setState(() {
     });
   }
