@@ -74,7 +74,7 @@ class price extends StatelessWidget {
                       )
                   ),
                   padding:  EdgeInsets.symmetric(vertical: 8,horizontal: 28),
-                  child: Text(total,
+                  child: Text("Rs. ${total}",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,

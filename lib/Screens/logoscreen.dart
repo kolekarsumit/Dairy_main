@@ -59,10 +59,17 @@ class _LogoSelectorState extends State<LogoSelector> {
                   child: Text('Select Logo 1'),
                 ),
                 SizedBox(height: 50,),
-               widget.machineInfo.icon1.isNotEmpty? CircleAvatar(
-                  radius: 50.0,
-                  backgroundImage: FileImage(File(widget.machineInfo.icon1)),
-                ):CircleAvatar(
+               widget.machineInfo.icon1.isNotEmpty?  Container(
+                 width: 200.0, // Adjust width as needed
+                 height: 100.0, // Adjust height as needed
+                 decoration: BoxDecoration(
+                   borderRadius: BorderRadius.circular(10.0), // Adjust border radius as needed
+                   image: DecorationImage(
+                     fit: BoxFit.cover,
+                     image: FileImage(File(widget.machineInfo.icon1)),
+                   ),
+                 ),
+               ):CircleAvatar(
                  radius: 50.0,
                  backgroundColor: Colors.black12,
                )
@@ -77,9 +84,16 @@ class _LogoSelectorState extends State<LogoSelector> {
                 ),
 
                 SizedBox(height: 50,),
-                widget.machineInfo.icon2.isNotEmpty? CircleAvatar(
-                  radius: 50.0,
-                  backgroundImage: FileImage(File(widget.machineInfo.icon2)),
+                widget.machineInfo.icon2.isNotEmpty?  Container(
+                  width: 200.0, // Adjust width as needed
+                  height: 100.0, // Adjust height as needed
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0), // Adjust border radius as needed
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: FileImage(File(widget.machineInfo.icon2)),
+                    ),
+                  ),
                 ):CircleAvatar(
                   radius: 50.0,
                   backgroundColor: Colors.black12,

@@ -13,6 +13,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../Admin/Admin_pannel/details_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 class Itemscreen extends StatefulWidget {
   MachineInfo machineInfo;
@@ -126,13 +128,19 @@ class _ItemscreenState extends State<Itemscreen> {
                     ignoring: selectedcardindex==-1,
                     child: GestureDetector(
                       onTap: () {
-                        if(selectedcardindex!=-1) {
+                        if(selectedcardindex!=-1&&productDetails[selectedcardindex].stock!=0) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => pricescreen(selectedcardindex,img[selectedcardindex%3],productDetails,widget.machineInfo),
                             ),
                           );
+                        }else{
+                          Fluttertoast.showToast(msg: "Please select a product before proceeding.\n If any product is out of stock, please remove it from your selection",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM);
+
                         }
+
                       },
                       child: Align(
                         alignment: Alignment.bottomRight,

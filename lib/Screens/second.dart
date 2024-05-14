@@ -211,7 +211,7 @@ String qd='';
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(left: 15.0, top: 5),
-                                            child: Text(pd,
+                                            child: Text("Rs. ${pd}",
                                               style: TextStyle(color: Colors.black, fontSize: 14, fontFamily: 'fonts/bolt-semibold.ttf',),
                                             ),
                                           )

@@ -267,6 +267,8 @@ class _AdminViewState extends State<AdminView> {
                   machineInfo: machineInfo,
                 ),
 
+                SizedBox(height: 20,),
+
               ],
             ),
           ),

@@ -299,7 +299,7 @@ class _item_cardState extends State<item_card> with TickerProviderStateMixin {
                     color: Colors.white,
                     border: Border.all(color: Colors.white, width: 1)),
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-                child: Text(
+                child: widget.product.stock!=0?Text(
                   "Select",
                   style: TextStyle(
                       fontFamily: 'bolt-semibold.ttf',
@@ -307,7 +307,12 @@ class _item_cardState extends State<item_card> with TickerProviderStateMixin {
                       fontSize: 12,
                       fontWeight: FontWeight.bold
                   ),
-                ),
+                ):Text("Sorry ! Product out of the stock", style: TextStyle(
+                    fontFamily: 'bolt-semibold.ttf',
+                    color: Colors.red,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold
+                )),
               ),
             ),
           ],
