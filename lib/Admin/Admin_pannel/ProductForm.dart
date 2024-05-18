@@ -1,16 +1,14 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'DetailsPopup.dart';
 import 'details_model.dart';
 
-
 class ProductForm extends StatefulWidget {
   final int id;
   final List<Product> productDetail;
-  Function(List<Product>) callback;
-  ProductForm(this.id, this.productDetail,this.callback);
+  final Function(List<Product>) callback;
 
+  ProductForm(this.id, this.productDetail, this.callback);
 
   @override
   State<ProductForm> createState() => _ProductFormState();
@@ -18,34 +16,45 @@ class ProductForm extends StatefulWidget {
 
 class _ProductFormState extends State<ProductForm> {
   List<Product> productDetails = [];
-  Product? product;
+  bool isEnable = false;
+  bool isDisable = false;
 
   @override
   void initState() {
-    productDetails=widget.productDetail;
     super.initState();
+    productDetails = widget.productDetail;
+    isEnable = productDetails[widget.id].isEnable;
+    isDisable = !isEnable;
   }
+
   void _showDetailsDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return DetailsPopup(productDetails[widget.id],(Product product){
-          productDetails[widget.id]=product;
-          print(product.toJson());
+        return DetailsPopup(productDetails[widget.id], (Product product) {
+          setState(() {
+            productDetails[widget.id] = product;
+            isEnable = product.isEnable;
+            isDisable = !isEnable;
+          });
           widget.callback(productDetails);
         });
       },
     );
   }
 
-  void remove(){
-    productDetails.removeAt(widget.id);
-    widget.callback(productDetails);
+  void remove() {
+    setState(() {
+      productDetails.removeAt(widget.id);
+      widget.callback(productDetails);
+    });
   }
+
   @override
   Widget build(BuildContext context) {
     int id_ = widget.id;
     Product product = productDetails[id_];
+
     return Container(
       child: SingleChildScrollView(
         child: Padding(
@@ -73,7 +82,6 @@ class _ProductFormState extends State<ProductForm> {
                 ),
               ),
               Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   buildQuantityOption(product.quantity1),
                   buildQuantityOption(product.quantity2),
@@ -88,32 +96,53 @@ class _ProductFormState extends State<ProductForm> {
                 ],
               ),
               ElevatedButton(
-                onPressed: () {
-                  productDetails[widget.id].isEnable=true;
+                onPressed: isEnable
+                    ? null
+                    : () {
+                  setState(() {
+                    isEnable = true;
+                    isDisable = false;
+                    productDetails[widget.id].isEnable = true;
+                  });
                   widget.callback(productDetails);
                 },
-                child: Text("Enable",style: TextStyle(color: Colors.white),),
+                child: Text(
+                  "Enable",
+                  style: TextStyle(color: Colors.white),
+                ),
                 style: ButtonStyle(
-                  backgroundColor:
-                  MaterialStateProperty.all<Color>(Colors.green),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      isEnable ? Colors.green : Colors.grey),
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
-                  productDetails[widget.id].isEnable=false;
+                onPressed: isDisable
+                    ? null
+                    : () {
+                  setState(() {
+                    isDisable = true;
+                    isEnable = false;
+                    productDetails[widget.id].isEnable = false;
+                  });
                   widget.callback(productDetails);
                 },
-                child: Text("Disable",style: TextStyle(color: Colors.white)),
+                child: Text(
+                  "Disable",
+                  style: TextStyle(color: Colors.white),
+                ),
                 style: ButtonStyle(
-                  backgroundColor:
-                  MaterialStateProperty.all<Color>(Colors.red),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      isDisable ? Colors.red : Colors.grey),
                 ),
               ),
               ElevatedButton(
                 onPressed: () {
                   _showDetailsDialog(context);
                 },
-                child: Text("Details",style: TextStyle(color: Colors.white)),
+                child: Text(
+                  "Details",
+                  style: TextStyle(color: Colors.white),
+                ),
                 style: ButtonStyle(
                   backgroundColor:
                   MaterialStateProperty.all<Color>(Colors.grey),
@@ -129,7 +158,6 @@ class _ProductFormState extends State<ProductForm> {
                   color: Colors.red,
                 ),
               ),
-
             ],
           ),
         ),
